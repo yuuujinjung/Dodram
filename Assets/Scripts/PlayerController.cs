@@ -22,10 +22,6 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void FixedUpdate()
     {
@@ -37,13 +33,12 @@ public class PlayerController : MonoBehaviour
         heading.y = 0;
         heading = heading.normalized;
 
-
         //정면이동 대입연산
-        movement = heading * Time.deltaTime * Input.GetAxis("Vertical");
+        movement = heading * Time.deltaTime * Input.GetAxisRaw("Vertical");
         //측면이동 합연산
-        movement += Quaternion.Euler(0, 90, 0) * heading * Time.deltaTime * Input.GetAxis("Horizontal");
+        movement += Quaternion.Euler(0, 90, 0) * heading * Time.deltaTime * Input.GetAxisRaw("Horizontal");
 
-        transform.Translate(movement*speed);
+        characterRigidbody.velocity = transform.TransformDirection(movement.normalized * speed);
 
     }
 

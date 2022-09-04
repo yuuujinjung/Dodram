@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1844730026253550321}
   - component: {fileID: 1844730026253550326}
   - component: {fileID: 1844730026253550327}
-  - component: {fileID: 3621178618265015940}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -98,19 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae58be02478dfe4882fa29f4d6b6162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &3621178618265015940
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844730026253550320}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.53, y: 0.47, z: 0.17}
-  m_Center: {x: 0, y: -2.5410934e-10, z: 0.07}
 --- !u!1 &1844730026374671986
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1844730026374671987}
+  - component: {fileID: 616937588}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -143,3 +130,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &616937588
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844730026374671986}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5273935, z: 0.50765395}
+  m_Center: {x: 0, y: 0.2994288, z: -0.11487746}
