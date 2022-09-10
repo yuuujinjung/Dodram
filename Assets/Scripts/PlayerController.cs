@@ -7,30 +7,27 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private float speed;
-    private Rigidbody characterRigidbody;
-    private Vector3 movement;
-    private Vector3 heading;
+    private Rigidbody2D _characterRigidbody;
+    private Vector2 _movement;
 
-    private Transform mainCamera;
 
-    public Animator animator;
-    string animationState = "AnimationState";
+    Animator _animator;
+    string _animationState = "AnimationState";
 
     enum States 
     {
-        right = 1,
-        left = 2,
-        up = 3,
-        down = 4,
-        idle = 5
+        Right = 1,
+        Left = 2,
+        Up = 3,
+        Down = 4,
+        Idle = 5
     }
-
 
     void Start()
     {
-        characterRigidbody = GetComponent<Rigidbody>();
-        mainCamera = GameObject.Find("Main Camera").transform;
-        heading = mainCamera.localRotation * Vector3.forward;
+        Managers.Input.KeyAction += OnKeyboard;
+        _animator = GetComponent<Animator>();
+        _characterRigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -41,43 +38,40 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MoveCharactor();
+        OnKeyboard();
     }
 
-    private void MoveCharactor()
+    private void OnKeyboard()
     {
-        heading.y = 0;
-        heading = heading.normalized;
+        _movement.x = Input.GetAxisRaw("Horizontal");
+        _movement.y = Input.GetAxisRaw("Vertical");
 
-        //정면이동 대입연산
-        movement = heading * Time.deltaTime * Input.GetAxisRaw("Vertical");
-        //측면이동 합연산
-        movement += Quaternion.Euler(0, 90, 0) * heading * Time.deltaTime * Input.GetAxisRaw("Horizontal");
+        _movement.Normalize();
 
-        characterRigidbody.velocity = transform.TransformDirection(movement.normalized * speed);
-
+        _characterRigidbody.velocity = _movement * speed;
     }
+    
     private void UpdateState()
     {
-        if (movement.x > 0)
+        if (_movement.x > 0)
         {
-            animator.SetInteger(animationState, (int)States.right);
+            _animator.SetInteger(_animationState, (int)States.Right);
         }
-        else if (movement.x < 0)
+        else if (_movement.x < 0)
         {
-            animator.SetInteger(animationState, (int)States.left);
+            _animator.SetInteger(_animationState, (int)States.Left);
         }
-        else if (movement.z > 0)
+        else if (_movement.y > 0)
         {
-            animator.SetInteger(animationState, (int)States.up);
+            _animator.SetInteger(_animationState, (int)States.Up);
         }
-        else if (movement.z < 0)
+        else if (_movement.y < 0)
         {
-            animator.SetInteger(animationState, (int)States.down);
+            _animator.SetInteger(_animationState, (int)States.Down);
         }
         else
         {
-            animator.SetInteger(animationState, (int)States.idle);
+            _animator.SetInteger(_animationState, (int)States.Idle);
         }
     }
 }
