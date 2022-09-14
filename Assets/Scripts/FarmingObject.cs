@@ -16,7 +16,7 @@ public class FarmingObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isDig && Input.GetKeyDown(KeyCode.Space))
+        if(isDig && Input.GetKeyDown(KeyCode.LeftControl))
         {
             Digging();
         }
@@ -55,8 +55,7 @@ public class FarmingObject : MonoBehaviour
             obj = Managers.Resource.Instantiate("weed");
             obj.transform.position = this.transform.position;
         }
-        //obj = Managers.Resource.Instantiate("stone");
-        //obj.transform.position = this.transform.position;
+
         Destroy(gameObject);
 
     }

@@ -7,6 +7,9 @@ TagManager:
   - tree
   - stone
   - grass
+  - chip
+  - shingle
+  - item
   layers:
   - Default
   - TransparentFX
