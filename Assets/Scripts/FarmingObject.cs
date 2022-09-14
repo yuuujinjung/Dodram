@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class FarmingObject : MonoBehaviour
 {
     bool isDig;
-    public GameObject ammo;
+    private GameObject obj;
 
     void Start()
     {
-        //ammo = Managers.Resource.Instantiate("stone");
+
     }
 
     // Update is called once per frame
@@ -40,7 +40,24 @@ public class FarmingObject : MonoBehaviour
 
     void Digging()
     {
+        if(this.gameObject.name == "tree")
+        {
+            obj = Managers.Resource.Instantiate("chip");
+            obj.transform.position = this.transform.position;
+        }
+        else if (this.gameObject.name == "stone")
+        {
+            obj = Managers.Resource.Instantiate("shingle");
+            obj.transform.position = this.transform.position;
+        }
+        else if (this.gameObject.name == "grass")
+        {
+            obj = Managers.Resource.Instantiate("weed");
+            obj.transform.position = this.transform.position;
+        }
+        //obj = Managers.Resource.Instantiate("stone");
+        //obj.transform.position = this.transform.position;
         Destroy(gameObject);
-        Managers.Resource.Instantiate("stone");
+
     }
 }
