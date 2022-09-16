@@ -10,6 +10,8 @@ TagManager:
   - chip
   - shingle
   - item
+  - tool
+  - HoldPoint
   layers:
   - Default
   - TransparentFX

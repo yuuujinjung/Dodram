@@ -15,10 +15,6 @@ public class PlayerController : MonoBehaviour
     Animator _animator;
     string _animationState = "AnimationState";
 
-
-    bool isHold = false;
-    public GameObject pickupItem;
-
     enum States 
     {
         Right = 1,
@@ -42,18 +38,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         UpdateState();
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-
-        }
-
-        if(pickupItem != null)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                pickupItem = null;
-            }
-        }
     }
 
     private void FixedUpdate()
@@ -92,29 +76,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             _animator.SetInteger(_animationState, (int)States.Idle);
-        }
-    }
-
-
-    void OnTriggerStay2D(Collider2D col)
-    {
-        if (col.gameObject.tag.Equals("item") && Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            pickupItem.transform.position = this.transform.position;
-            pickupItem = col.gameObject;
-        }
-        else if (col.gameObject.tag.Equals("tool") && Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            pickupItem.transform.position = this.transform.position;
-            pickupItem = col.gameObject;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.tag.Equals("Player"))
-        {
-            isHold = false;
         }
     }
 
