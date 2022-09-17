@@ -43,6 +43,8 @@ public class ItemScript : MonoBehaviour
             {
                 playerHoldingPoint.transform.DetachChildren();
                 this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                isHold = false;
+                Debug.Log("³õ±â");
             }
         }
     }
