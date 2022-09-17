@@ -9,11 +9,12 @@ public class ItemScript : MonoBehaviour
     GameObject playerHoldingPoint;
     Vector2 forceDirection;
     bool isPlayerEnter;
+    bool isHold;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        isHold = false;
     }
 
     void Awake()
@@ -31,8 +32,18 @@ public class ItemScript : MonoBehaviour
             transform.SetParent(playerHoldingPoint.transform);
             transform.localPosition = Vector2.zero;
             transform.rotation = new Quaternion(0, 0, 0, 0);
+            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
+            isHold = true;
             isPlayerEnter = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift) && !isPlayerEnter)
+        {
+            if(isHold == true)
+            {
+                playerHoldingPoint.transform.DetachChildren();
+                this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            }
         }
     }
 
