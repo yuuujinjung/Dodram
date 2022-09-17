@@ -14,7 +14,7 @@ public class ItemScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isHold = false;
+        //isHold = false;
     }
 
     void Awake()
@@ -28,14 +28,30 @@ public class ItemScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftShift) && isPlayerEnter)
         {
-            Debug.Log("들기");
-            transform.SetParent(playerHoldingPoint.transform);
-            transform.localPosition = Vector2.zero;
-            transform.rotation = new Quaternion(0, 0, 0, 0);
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            if(isHold == false)
+            {
+                this.transform.SetParent(playerHoldingPoint.transform);
+                this.transform.localPosition = Vector2.zero;
+                this.transform.rotation = new Quaternion(0, 0, 0, 0);
+                //this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
-            isHold = true;
-            isPlayerEnter = false;
+                Debug.Log("들기");
+                isHold = true;
+                isPlayerEnter = false;
+            }
+            else
+            {
+                playerHoldingPoint.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = true;
+                playerHoldingPoint.transform.DetachChildren();
+                this.transform.SetParent(playerHoldingPoint.transform);
+                this.transform.localPosition = Vector2.zero;
+                this.transform.rotation = new Quaternion(0, 0, 0, 0);
+                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+                Debug.Log("바꾸기");
+                isHold = true;
+                isPlayerEnter = false;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.LeftShift) && !isPlayerEnter)
         {

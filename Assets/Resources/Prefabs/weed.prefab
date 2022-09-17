@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6623405339790370847}
   - component: {fileID: 6668381967116501407}
   - component: {fileID: 8582780290545786352}
-  - component: {fileID: -1834730423191798649}
   m_Layer: 0
   m_Name: weed
   m_TagString: item
@@ -99,7 +98,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.015387207, y: -0.0099563375}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,17 +109,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.54, y: 0.81}
+  m_Size: {x: 0.7880052, y: 0.4171744}
   m_EdgeRadius: 0
---- !u!114 &-1834730423191798649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2041883255594010392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0606bb4716ab7c47adab67730ea6ee2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

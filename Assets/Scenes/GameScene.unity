@@ -154,6 +154,11 @@ Transform:
   m_Father: {fileID: 457332815}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &174685130 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7717794331357661640, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+  m_PrefabInstance: {fileID: 916322949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &424887054
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +241,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7717794331357661637, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
   m_PrefabInstance: {fileID: 916322949}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &457332821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174685130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96134f6596279364e9b2271c0f2b82ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &581940561
 GameObject:
   m_ObjectHideFlags: 0
@@ -10140,6 +10157,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1068998006454131382, guid: 79933c66ef09ad0449fa475682f845ba, type: 3}
       propertyPath: m_Name
       value: Axe
@@ -10274,6 +10295,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 563305697227657289, guid: 282b30dde737e8241a9038d2d778e712, type: 3}
       propertyPath: m_Name
       value: Scythe
@@ -10335,6 +10360,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1373631867794758442, guid: c9b1f1c5e0daadc4c9cc832f2dea691d, type: 3}
       propertyPath: m_IsTrigger
       value: 1
