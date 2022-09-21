@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8413435733663017801}
   - component: {fileID: 7789804024404793538}
   - component: {fileID: 8154010233005943085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tree
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.27777112}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.13953482}
@@ -110,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.54, y: 0.75}
+  m_Size: {x: 0.54, y: 0.76792073}
   m_EdgeRadius: 0
 --- !u!114 &8154010233005943085
 MonoBehaviour:
@@ -124,3 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27196748f73de9a4d8c3f57ee4f0a209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropItem: {fileID: 2041883255594010392, guid: ce48307ae675aea4bb0d14e8fdb5bf97, type: 3}

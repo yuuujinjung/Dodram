@@ -1,103 +1,118 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class PickUpScript : MonoBehaviour
 {
-    GameObject obj;
-    GameObject holdObj;
-    GameObject playerHoldingPoint;
-    Vector2 forceDirection;
-    bool isPlayerEnter;
-    bool isHold;
+    public Vector2 size;
+    public LayerMask whatIsLayer;
+    public GameObject Hand;
+
+    public bool isHold;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         isHold = false;
     }
-
-    void Awake()
-    {
-        playerHoldingPoint = GameObject.FindGameObjectWithTag("HoldPoint");
-    }
-
+    
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && isPlayerEnter)
-        {
-            if (isHold == false)
-            {
-                holdObj = obj;
-                holdObj.transform.SetParent(playerHoldingPoint.transform);
-                holdObj.transform.localPosition = Vector2.zero;
-                holdObj.transform.rotation = new Quaternion(0, 0, 0, 0);
-                //this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Interactive(); //상호작용
+    }
+    
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, size);
+    }
 
-                Debug.Log("들기");
-                isHold = true;
-                isPlayerEnter = false;
-            }
-            else
-            {
-                playerHoldingPoint.transform.GetChild(0).GetComponent<BoxCollider2D>().enabled = true;
-                playerHoldingPoint.transform.DetachChildren();
-                holdObj = obj;
-                holdObj.transform.SetParent(playerHoldingPoint.transform);
-                holdObj.transform.localPosition = Vector2.zero;
-                holdObj.transform.rotation = new Quaternion(0, 0, 0, 0);
-                holdObj.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-
-                Debug.Log("바꾸기");
-                isHold = true;
-                isPlayerEnter = false;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftShift) && !isPlayerEnter)
+    void Interactive()
+    {
+        Collider2D[] hit = Physics2D.OverlapBoxAll(transform.position, size, 0, whatIsLayer);
+        
+        if (hit != null)
         {
+            for(int i = 0; i < hit.Length; ++i)
+            {
+                Debug.Log(hit[i].name);
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                if (isHold == true)
+                { 
+                    Hand.transform.DetachChildren();
+                    isHold = false;
+                    return;
+                }
+                
+                for(int i = 0; i < hit.Length; ++i)
+                {
+                    if (hit[i].CompareTag("tool") || hit[i].CompareTag("item"))
+                    {
+                        hit[i].gameObject.transform.SetParent(Hand.transform);
+                        hit[i].transform.localPosition = Vector2.zero;
+                        isHold = true;
+                    }
+                    break;
+                }
+            }
+
             if (isHold == true)
             {
-                playerHoldingPoint.transform.DetachChildren();
-                holdObj.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                holdObj = null;
-                isHold = false;
-                Debug.Log("놓기");
+                if (Hand.transform.GetChild(0).name == "Axe")
+                {
+                    for (int i = 0; i < hit.Length; ++i)
+                    {
+                        if (hit[i].CompareTag("Tree"))
+                        {
+                            if (Input.GetKeyDown(KeyCode.LeftControl))
+                            {
+                                hit[i].GetComponent<FarmingObject>().Digging();
+                            }
+                            break;
+                        }
+                    }
+                }
+                if (Hand.transform.GetChild(0).name == "PickAxe")
+                {
+                    for (int i = 0; i < hit.Length; ++i)
+                    {
+                        if (hit[i].CompareTag("Stone"))
+                        {
+                            if (Input.GetKeyDown(KeyCode.LeftControl))
+                            {
+                                hit[i].GetComponent<FarmingObject>().Digging();
+                            }
+                            break;
+                        }
+                    }
+                }
+                if (Hand.transform.GetChild(0).name == "Scythe")
+                {
+                    for (int i = 0; i < hit.Length; ++i)
+                    {
+                        if (hit[i].CompareTag("Grass"))
+                        {
+                            if (Input.GetKeyDown(KeyCode.LeftControl))
+                            {
+                                hit[i].GetComponent<FarmingObject>().Digging();
+                            }
+                            break;
+                        }
+                    }
+                }   
             }
-        }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("tool"))
-        {
-            //obj = GameObject.FindGameObjectWithTag("tool");
-            obj = collision.gameObject;
-            isPlayerEnter = true;
-            Debug.Log("도구 충돌");
-        }
-        else if (collision.CompareTag("item"))
-        {
-            obj = collision.gameObject;
-            isPlayerEnter = true;
-            Debug.Log("아이템 충돌");
-        }
-    }
+            
+            
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("tool"))
-        {
-            obj = null;
-            isPlayerEnter = false;
-            Debug.Log("도구 충돌 해제");
-        }
-        else if (collision.CompareTag("item"))
-        {
-            obj = null;
-            isPlayerEnter = false;
-            Debug.Log("아이템 충돌 해제");
         }
     }
 }
