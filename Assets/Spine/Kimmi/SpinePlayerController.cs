@@ -1,5 +1,9 @@
-using Spine.Unity;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.UI;
+using Spine.Unity;
 
 public class SpinePlayerController : MonoBehaviour
 {
@@ -16,7 +20,11 @@ public class SpinePlayerController : MonoBehaviour
 
         Walk_E = 3,
         Walk_N = 4,
-        Walk_S = 5
+        Walk_S = 5,
+
+        Hit_E = 6,
+        Hit_N = 7,
+        Hit_S = 8,
     }
 
     private AnimState _animState;
@@ -37,7 +45,7 @@ public class SpinePlayerController : MonoBehaviour
 
     private void Update() => UpdateState();
 
-    private void FixedUpdate() =>  OnKeyboard();
+    private void FixedUpdate() => OnKeyboard();
 
     private void OnKeyboard()
     {
@@ -91,6 +99,12 @@ public class SpinePlayerController : MonoBehaviour
             {
                 _animState = AnimState.Idle_S;
             }
+        }
+
+        //
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            _animState = AnimState.Hit_S;
         }
 
         SetCurrentAnimation(_animState);
