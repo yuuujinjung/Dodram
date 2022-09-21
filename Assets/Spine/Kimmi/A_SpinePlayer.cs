@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.UI;
-using Spine.Unity;
 
 public class A_SpinePlayer : MonoBehaviour
 {
     [SerializeField] private float speed = 4.0f;
     private Animator _animator;
     private string _animationState = "AnimationState";
-    private string _formerAnimationState = "FormerAnimationState";
+    private int _currentAnimationState;
+    private int _formerAnimationCode; //_currentAnimationState%10, 0==E, 1==N, 2==S
     private Rigidbody2D _characterRigidbody;
     private Vector2 _movement;
 
@@ -42,7 +38,6 @@ public class A_SpinePlayer : MonoBehaviour
     private void Update()
     {
         UpdateState();
-        //_animator.SetInteger(_formerAnimationState,)
     }
 
     private void FixedUpdate() => OnKeyboard();
@@ -61,33 +56,49 @@ public class A_SpinePlayer : MonoBehaviour
     {
         transform.localScale = new Vector3(1f, 1f, 1f);
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            _animator.SetInteger(_animationState, (int)States.Hit_S);
-            return;
-        }
-
         if (_movement.x != 0)
         {
-            _animator.SetInteger(_animationState, (int)States.Walk_E);
+            _currentAnimationState = (int)States.Walk_E;
 
-            if(_movement.x < 0)
+            if (_movement.x < 0)
             {
                 transform.localScale = new Vector3(-1f, 1f, 1f);
             }
         }
         else if (_movement.y > 0)
         {
-            _animator.SetInteger(_animationState, (int)States.Walk_N);
+            _currentAnimationState = (int)States.Walk_N;
         }
         else if (_movement.y < 0)
         {
-            _animator.SetInteger(_animationState, (int)States.Walk_S);
+            _currentAnimationState = (int)States.Walk_S;
         }
         else
         {
-            _animator.SetInteger(_animationState, (int)States.Idle_S);
+            switch (_formerAnimationCode)
+            {
+                case 0:
+                    _currentAnimationState = (int)States.Idle_E;
+                    break;
+                case 1:
+                    _currentAnimationState = (int)States.Idle_N;
+                    break;
+                case 2:
+                    _currentAnimationState = (int)States.Idle_S;
+                    break;
+                default:
+                    break;
+            }
         }
+
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            _currentAnimationState = (int)States.Hit_S;
+        }
+
+        _animator.SetInteger(_animationState, _currentAnimationState);
+        _formerAnimationCode = _currentAnimationState % 10;
 
     }
 }

@@ -364,6 +364,14 @@ PrefabInstance:
       propertyPath: size.y
       value: 0.72
       objectReference: {fileID: 0}
+    - target: {fileID: 457332827, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+      propertyPath: whatIsLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222349470022041510, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7717794331357661637, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -414,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7717794331357661640, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
@@ -557,15 +565,15 @@ GameObject:
   - component: {fileID: 1411386447}
   - component: {fileID: 1411386446}
   - component: {fileID: 1411386450}
-  - component: {fileID: 1411386448}
   - component: {fileID: 1411386449}
+  - component: {fileID: 1411386451}
   m_Layer: 0
   m_Name: SpinePlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1411386445
 Transform:
   m_ObjectHideFlags: 0
@@ -579,6 +587,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1796005234}
+  - {fileID: 1848676924}
   m_Father: {fileID: 1220249868}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -623,27 +632,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1411386448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411386444}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd30bde0c90ad34a97c25d688ec1492, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
-  SkeletonAnimation: {fileID: 1796005236}
-  animClip:
-  - {fileID: 11400000, guid: bdec890b30a010143ae80e344cb94e10, type: 2}
-  - {fileID: 11400000, guid: bb3f57b3863e43b4a9ca8b8e2e1be955, type: 2}
-  - {fileID: 11400000, guid: cac937982d515694997040b679feb636, type: 2}
-  - {fileID: 11400000, guid: 36072e1af8ff94942a7dd598e067abf0, type: 2}
-  - {fileID: 11400000, guid: 74f7621c2a2778e4abcb8696dccbbf38, type: 2}
-  - {fileID: 11400000, guid: 2753b67890023dc45974f710774bc7ba, type: 2}
 --- !u!61 &1411386449
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -654,7 +642,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.53}
@@ -683,6 +671,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+--- !u!114 &1411386451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411386444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96134f6596279364e9b2271c0f2b82ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 0.68, y: 0.72}
+  whatIsLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  Hand: {fileID: 1848676923}
+  isHold: 0
 --- !u!1 &1439182231
 GameObject:
   m_ObjectHideFlags: 0
@@ -9993,7 +9999,7 @@ Transform:
   m_GameObject: {fileID: 1796005233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.13, y: 0.13, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1411386445}
@@ -10151,6 +10157,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7074832435447887528, guid: 2192791951e8fc34992e281ffa4d35a4, type: 3}
   m_PrefabInstance: {fileID: 1796658052}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1848676923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1848676924}
+  m_Layer: 0
+  m_Name: Hand
+  m_TagString: HoldPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1848676924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848676923}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.27, y: 0.31, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1411386445}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1942393197 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 840899400817964747, guid: 282b30dde737e8241a9038d2d778e712, type: 3}
