@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6668381967116501407}
   - component: {fileID: 8582780290545786352}
   m_Layer: 6
-  m_Name: wood
+  m_Name: Wood
   m_TagString: item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.015387207, y: -0.0099563375}
+  m_Offset: {x: 0.0014926493, y: -0.0321877}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -109,5 +109,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7880052, y: 0.4171744}
+  m_Size: {x: 0.23778087, y: 0.2393241}
   m_EdgeRadius: 0

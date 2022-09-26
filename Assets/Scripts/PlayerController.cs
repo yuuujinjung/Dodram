@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     Animator _animator;
     string _animationState = "AnimationState";
-
+    
     enum States 
     {
         Right = 1,
@@ -26,9 +26,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        // 구독 신청! KeyAction이 Invoke 되면 호출할 함수! (중복을 막기위해 빼준 후 추가)
-        Managers.Input.KeyAction -= OnKeyboard;
-        Managers.Input.KeyAction += OnKeyboard;
+        // // 구독 신청! KeyAction이 Invoke 되면 호출할 함수! (중복을 막기위해 빼준 후 추가)
+        // Managers.Input.KeyAction -= OnKeyboard;
+        // Managers.Input.KeyAction += OnKeyboard;
         
         _animator = GetComponent<Animator>();
         _characterRigidbody = GetComponent<Rigidbody2D>();
@@ -42,10 +42,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        OnKeyboard();
+        Movement();
     }
 
-    private void OnKeyboard()
+    private void Movement()
     {
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");

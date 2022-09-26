@@ -8,11 +8,17 @@ using System.Linq;
 public class PickUpScript : MonoBehaviour
 {
     public Vector2 size;
+    public Vector3 boxTransform;
     public LayerMask whatIsLayer;
     public GameObject Hand;
 
     public bool isHold;
-    
+
+    [SerializeField] private GameObject targetObject;
+    [SerializeField] private GameObject targetEndObject;
+
+    [SerializeField] private Material whiteMaterial;
+    [SerializeField] private Material originalMaterial;
 
     // Start is called before the first frame update
     void Start()
@@ -29,89 +35,104 @@ public class PickUpScript : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, size);
+        Gizmos.DrawWireCube(transform.position + boxTransform, size);
     }
 
     void Interactive()
     {
-        Collider2D[] hit = Physics2D.OverlapBoxAll(transform.position, size, 0, whatIsLayer);
+        Collider2D hit = Physics2D.OverlapBox(transform.position+ boxTransform, size, 0, whatIsLayer);
+
+        if (Physics2D.OverlapBox(transform.position+ boxTransform, size, 0, whatIsLayer) == null)
+        {
+            if(targetObject != null) 
+            {
+                targetObject.GetComponent<SpriteRenderer>().material = originalMaterial;
+                targetObject = null;
+            }
+            if (targetEndObject != null)
+            {
+                targetEndObject.GetComponent<SpriteRenderer>().material = originalMaterial;
+                targetEndObject = null;
+            }
+        }
+        else if (targetObject != hit.gameObject)
+        {
+            targetEndObject = targetObject;
+            targetObject = hit.gameObject;
+            
+            if (targetObject != null)
+            {
+                targetObject.GetComponent<SpriteRenderer>().material = whiteMaterial;
+            }
+
+            if (targetEndObject != null)
+            {
+                targetEndObject.GetComponent<SpriteRenderer>().material = originalMaterial;
+            }
+        }
         
+        
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (isHold == true)
+            {
+                Hand.transform.GetChild(0).gameObject.layer = 6;
+                Hand.transform.DetachChildren();
+                isHold = false;
+                return;
+            }
+        }
+
         if (hit != null)
         {
-            for(int i = 0; i < hit.Length; ++i)
-            {
-                Debug.Log(hit[i].name);
-            }
-
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                if (isHold == true)
-                { 
-                    Hand.transform.DetachChildren();
-                    isHold = false;
-                    return;
-                }
-                
-                for(int i = 0; i < hit.Length; ++i)
+                if (hit.CompareTag("tool") || hit.CompareTag("item"))
                 {
-                    if (hit[i].CompareTag("tool") || hit[i].CompareTag("item"))
-                    {
-                        hit[i].gameObject.transform.SetParent(Hand.transform);
-                        hit[i].transform.localPosition = Vector2.zero;
-                        isHold = true;
-                    }
-                    break;
+                    hit.gameObject.transform.SetParent(Hand.transform);
+                    hit.transform.localPosition = Vector2.zero;
+                    hit.gameObject.layer = 0; //Default
+                    isHold = true;
                 }
             }
-
+            
             if (isHold == true)
             {
                 if (Hand.transform.GetChild(0).name == "Axe")
                 {
-                    for (int i = 0; i < hit.Length; ++i)
+                    if (hit.CompareTag("Tree"))
                     {
-                        if (hit[i].CompareTag("Tree"))
+                        if (Input.GetKeyDown(KeyCode.LeftControl))
                         {
-                            if (Input.GetKeyDown(KeyCode.LeftControl))
-                            {
-                                hit[i].GetComponent<FarmingObject>().Digging();
-                            }
-                            break;
+                            hit.GetComponent<FarmingObject>().Digging();
                         }
                     }
                 }
+                
                 if (Hand.transform.GetChild(0).name == "PickAxe")
                 {
-                    for (int i = 0; i < hit.Length; ++i)
+                    if (hit.CompareTag("Stone"))
                     {
-                        if (hit[i].CompareTag("Stone"))
+                        if (Input.GetKeyDown(KeyCode.LeftControl))
                         {
-                            if (Input.GetKeyDown(KeyCode.LeftControl))
-                            {
-                                hit[i].GetComponent<FarmingObject>().Digging();
-                            }
-                            break;
+                            hit.GetComponent<FarmingObject>().Digging();
                         }
                     }
+
                 }
                 if (Hand.transform.GetChild(0).name == "Scythe")
                 {
-                    for (int i = 0; i < hit.Length; ++i)
+                    if (hit.CompareTag("Grass"))
                     {
-                        if (hit[i].CompareTag("Grass"))
+                        if (Input.GetKeyDown(KeyCode.LeftControl))
                         {
-                            if (Input.GetKeyDown(KeyCode.LeftControl))
-                            {
-                                hit[i].GetComponent<FarmingObject>().Digging();
-                            }
-                            break;
+                            hit.GetComponent<FarmingObject>().Digging();
                         }
                     }
+
                 }   
             }
-
-            
-            
 
         }
     }

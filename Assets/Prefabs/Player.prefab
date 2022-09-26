@@ -130,7 +130,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: -108072237, guid: f96851df0dcea644d90515a988371431, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -172,10 +172,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0022182465, y: 0.22852263}
+  m_Offset: {x: 0.013035521, y: 0.21977337}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -186,7 +186,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6021869, y: 0.40645415}
+  m_Size: {x: 0.43293318, y: 0.34561166}
   m_EdgeRadius: 0
 --- !u!114 &7717794331357661643
 MonoBehaviour:
@@ -213,9 +213,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96134f6596279364e9b2271c0f2b82ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 0.65, y: 0.74}
+  size: {x: 0.94, y: 0.91}
   whatIsLayer:
     serializedVersion: 2
     m_Bits: 64
   Hand: {fileID: 38336168}
   isHold: 0
+  targetObject: {fileID: 0}
+  targetEndObject: {fileID: 0}
+  whiteMaterial: {fileID: 2100000, guid: 93c7ef568ea5f314585363389ad1baaf, type: 2}
+  originalMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

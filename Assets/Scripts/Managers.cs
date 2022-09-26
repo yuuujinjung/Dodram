@@ -16,7 +16,7 @@ public class Managers : MonoBehaviour
     
     private ResourceManager _resource = new ResourceManager();
     public static ResourceManager Resource { get { return Instance._resource; } }
-    
+
 
     void Start()
     {
@@ -26,6 +26,7 @@ public class Managers : MonoBehaviour
     void Update()
     {
         _input.OnUpdate();
+
     }
     
     static void Init()
