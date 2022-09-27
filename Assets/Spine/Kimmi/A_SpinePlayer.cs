@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class A_SpinePlayer : MonoBehaviour
 {
-    [SerializeField] private float speed = 4.0f;
+    [SerializeField] private float speed;
+
+
     private Animator _animator;
     private string _animationState = "AnimationState";
+
     private int _currentAnimationState;
-    private int _formerAnimationCode; //_currentAnimationState%10, 0==E, 1==N, 2==S
+    private int _formerAnimationCode = 2; //_currentAnimationState%10, 0==E, 1==N, 2==S
+    private bool _isScaleXInverse;
+
     private Rigidbody2D _characterRigidbody;
     private Vector2 _movement;
 
@@ -20,9 +25,9 @@ public class A_SpinePlayer : MonoBehaviour
         Walk_N = 11,
         Walk_S = 12,
 
-        Hit_E = 20,
-        Hit_N = 21,
-        Hit_S = 22,
+        //Hit_E = 20,
+        //Hit_N = 21,
+        //Hit_S = 22,
     }
 
     private void Awake()
@@ -44,6 +49,8 @@ public class A_SpinePlayer : MonoBehaviour
 
     private void OnKeyboard()
     {
+
+
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
 
@@ -59,10 +66,12 @@ public class A_SpinePlayer : MonoBehaviour
         if (_movement.x != 0)
         {
             _currentAnimationState = (int)States.Walk_E;
+            _isScaleXInverse = false;
 
             if (_movement.x < 0)
             {
                 transform.localScale = new Vector3(-1f, 1f, 1f);
+                _isScaleXInverse = true;
             }
         }
         else if (_movement.y > 0)
@@ -79,6 +88,10 @@ public class A_SpinePlayer : MonoBehaviour
             {
                 case 0:
                     _currentAnimationState = (int)States.Idle_E;
+                    if (_isScaleXInverse == true)
+                    {
+                        transform.localScale = new Vector3(-1f, 1f, 1f);
+                    }
                     break;
                 case 1:
                     _currentAnimationState = (int)States.Idle_N;
@@ -94,7 +107,7 @@ public class A_SpinePlayer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            _currentAnimationState = (int)States.Hit_S;
+            _animator.SetTrigger("Hit");
         }
 
         _animator.SetInteger(_animationState, _currentAnimationState);

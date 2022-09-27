@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
 
@@ -26,12 +24,12 @@ public class SpineAnimationBehavior : StateMachineBehaviour
         if (motion != null)
         {
             animationClip = motion.name;
-            Debug.Log(animationClip);
+            //Debug.Log(animationClip);
         }
     }
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {   
+    {
 
         if (_skeletonAnimation == null)
         {
@@ -44,6 +42,7 @@ public class SpineAnimationBehavior : StateMachineBehaviour
             isLoop = stateInfo.loop;
             _trackEntry = _spineAnimationState.SetAnimation(layer, animationClip, isLoop);
             _trackEntry.TimeScale = timeScale;
-;        }
+            Debug.Log(animationClip);
+        }
     }
 }

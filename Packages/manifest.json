@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.esotericsoftware.spine.urp-shaders": "file:C:/Desktop/2-2/xr/com.esotericsoftware.spine.urp-shaders-4.1-Unity2019.3-2022-09-02/com.esotericsoftware.spine.urp-shaders-4.1-2019.1",
     "com.unity.2d.animation": "7.0.6",
     "com.unity.2d.pixel-perfect": "5.0.1",
     "com.unity.2d.psdimporter": "6.0.4",
