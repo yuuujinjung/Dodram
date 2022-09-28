@@ -10,7 +10,6 @@ public class PortraitCameraController : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("Player");
     }
     private void Update()
     {
