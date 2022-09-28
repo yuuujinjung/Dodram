@@ -9,11 +9,11 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Kimmi_Material
   m_Shader: {fileID: 4800000, guid: a79d0a36ad5ba0542946e3c3317e2aa4, type: 3}
-  m_ValidKeywords:
-  - _ALPHAPREMULTIPLY_VERTEX_ONLY
-  - _STRAIGHT_ALPHA_INPUT
+  m_ValidKeywords: []
   m_InvalidKeywords:
+  - _ALPHAPREMULTIPLY_VERTEX_ONLY
   - _FULLRANGE_HARD_RAMP
+  - _STRAIGHT_ALPHA_INPUT
   - _USE8NEIGHBOURHOOD_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

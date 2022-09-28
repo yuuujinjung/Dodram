@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.Serialization;
 
 public class PickUpScript : MonoBehaviour
 {
@@ -13,6 +14,17 @@ public class PickUpScript : MonoBehaviour
     public GameObject Hand;
 
     public bool isHold;
+
+    [FormerlySerializedAs("DiggingPer")] public float GaugePer;
+
+    public GameObject prfGaugeBar;
+    public GameObject canvas;
+
+    private RectTransform gaugeBar;
+    public float height = 0.0f;
+    private Image nowGaugebar;
+
+    public float diggingSpd = 20.0f;
 
     [SerializeField] private GameObject targetObject;
     [SerializeField] private GameObject targetEndObject;
@@ -24,12 +36,29 @@ public class PickUpScript : MonoBehaviour
     void Start()
     {
         isHold = false;
+        GaugePer = 0.0f;
+        gaugeBar = Instantiate(prfGaugeBar, canvas.transform).GetComponent<RectTransform>();
+        nowGaugebar = gaugeBar.transform.GetChild(0).GetComponent<Image>();
     }
     
     // Update is called once per frame
     void Update()
     {
         Interactive(); //상호작용
+
+        Vector3 _gaugeBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + height, 0));
+        gaugeBar.position = _gaugeBarPos;
+
+        if (GaugePer <= 0)
+        {
+            gaugeBar.gameObject.SetActive(false);
+        }
+        else
+        {
+            gaugeBar.gameObject.SetActive(true);
+        }
+
+        nowGaugebar.fillAmount = GaugePer / 100.0f;
     }
     
     void OnDrawGizmos()
@@ -54,6 +83,7 @@ public class PickUpScript : MonoBehaviour
                 targetEndObject.GetComponent<SpriteRenderer>().material = originalMaterial;
                 targetEndObject = null;
             }
+            GaugePer = 0.0f;
         }
         else if (targetObject != hit.gameObject)
         {
@@ -69,6 +99,7 @@ public class PickUpScript : MonoBehaviour
             {
                 targetEndObject.GetComponent<SpriteRenderer>().material = originalMaterial;
             }
+            GaugePer = 0.0f;
         }
         
         
@@ -103,9 +134,14 @@ public class PickUpScript : MonoBehaviour
                 {
                     if (hit.CompareTag("Tree"))
                     {
-                        if (Input.GetKeyDown(KeyCode.LeftControl))
+                        if (Input.GetKey(KeyCode.LeftControl))
                         {
-                            hit.GetComponent<FarmingObject>().Digging();
+                            GaugePer += diggingSpd * Time.deltaTime;
+                            if (GaugePer >= 100)
+                            {
+                                hit.GetComponent<FarmingObject>().Digging();
+                                GaugePer = 0.0f;
+                            }
                         }
                     }
                 }
@@ -114,9 +150,14 @@ public class PickUpScript : MonoBehaviour
                 {
                     if (hit.CompareTag("Stone"))
                     {
-                        if (Input.GetKeyDown(KeyCode.LeftControl))
+                        if (Input.GetKey(KeyCode.LeftControl))
                         {
-                            hit.GetComponent<FarmingObject>().Digging();
+                            GaugePer += diggingSpd * Time.deltaTime;
+                            if (GaugePer >= 100)
+                            {
+                                hit.GetComponent<FarmingObject>().Digging();
+                                GaugePer = 0.0f;
+                            }
                         }
                     }
 
@@ -125,9 +166,14 @@ public class PickUpScript : MonoBehaviour
                 {
                     if (hit.CompareTag("Grass"))
                     {
-                        if (Input.GetKeyDown(KeyCode.LeftControl))
+                        if (Input.GetKey(KeyCode.LeftControl))
                         {
-                            hit.GetComponent<FarmingObject>().Digging();
+                            GaugePer += diggingSpd * Time.deltaTime;
+                            if (GaugePer >= 100)
+                            {
+                                hit.GetComponent<FarmingObject>().Digging();
+                                GaugePer = 0.0f;
+                            }
                         }
                     }
 
