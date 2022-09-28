@@ -7,6 +7,7 @@ public class A_SpinePlayer : MonoBehaviour
 
     private Animator _animator;
     private string _animationState = "AnimationState";
+    private string _isDigging = "isDigging";
 
     private int _currentAnimationState;
     private int _formerAnimationCode = 2; //_currentAnimationState%10, 0==E, 1==N, 2==S
@@ -25,9 +26,9 @@ public class A_SpinePlayer : MonoBehaviour
         Walk_N = 11,
         Walk_S = 12,
 
-        //Hit_E = 20,
-        //Hit_N = 21,
-        //Hit_S = 22,
+        Hit_E = 20,
+        Hit_N = 21,
+        Hit_S = 23,
     }
 
     private void Awake()
@@ -99,15 +100,23 @@ public class A_SpinePlayer : MonoBehaviour
                 case 2:
                     _currentAnimationState = (int)States.Idle_S;
                     break;
+                case 3:
+                    break;
                 default:
                     break;
             }
         }
 
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftControl))
         {
-            _animator.SetTrigger("Hit");
+            //_animator.SetTrigger("Hit");
+            //_currentAnimationState = (int)States.Hit_S;
+            _animator.SetBool(_isDigging, true);
+        }
+        else
+        {
+            _animator.SetBool(_isDigging, false);
         }
 
         _animator.SetInteger(_animationState, _currentAnimationState);

@@ -48,15 +48,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: BG
+  - name: -3_BG
     uniqueID: 2522966521
     locked: 0
-  - name: Floor
+  - name: -2_Floor
     uniqueID: 2808908765
     locked: 0
-  - name: Machine&House
-    uniqueID: 3432085187
+  - name: -1_FloorObjects
+    uniqueID: 725754609
     locked: 0
-  - name: Player&Objects
+  - name: 0_Player&Objects
     uniqueID: 501280837
     locked: 0

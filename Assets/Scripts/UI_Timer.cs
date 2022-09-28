@@ -8,6 +8,7 @@ public class UI_Timer : MonoBehaviour
     [SerializeField] private float _MAX_TIME = 300.0f;
     [SerializeField] private float _current_time;
     [SerializeField] private float width = 1600;
+    [SerializeField] private float endWidth = 140;
 
     RectTransform rect;
 
@@ -28,7 +29,7 @@ public class UI_Timer : MonoBehaviour
         }
 
         _current_time -= Time.deltaTime;
-        rect.sizeDelta = new Vector2(width * (_current_time / _MAX_TIME), rect.sizeDelta.y);
+        rect.sizeDelta = new Vector2((width-endWidth) * (_current_time / _MAX_TIME)+endWidth, rect.sizeDelta.y);
 
 
     }

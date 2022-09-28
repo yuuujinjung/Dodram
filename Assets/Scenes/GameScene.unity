@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 79841881}
   - component: {fileID: 79841880}
   - component: {fileID: 79841882}
+  - component: {fileID: 79841883}
   m_Layer: 6
   m_Name: Sawmill
   m_TagString: Untagged
@@ -237,6 +238,22 @@ PolygonCollider2D:
       - {x: 0.4354091, y: -0.18483505}
       - {x: 0.013113938, y: 0.080738336}
       - {x: -0.4426225, y: -0.19073689}
+--- !u!114 &79841883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79841879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ff3e99a4117c74c88515b851cfb891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hand: {fileID: 1865596520}
+  small: {fileID: 0}
+  mideum: {fileID: 0}
+  large: {fileID: 0}
 --- !u!1 &84999074
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +567,7 @@ GameObject:
   - component: {fileID: 417080864}
   - component: {fileID: 417080863}
   - component: {fileID: 417080862}
+  - component: {fileID: 417080865}
   m_Layer: 6
   m_Name: Mill
   m_TagString: Untagged
@@ -653,6 +671,22 @@ Transform:
   m_Father: {fileID: 581940562}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &417080865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417080861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ff3e99a4117c74c88515b851cfb891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hand: {fileID: 1865596520}
+  small: {fileID: 0}
+  mideum: {fileID: 0}
+  large: {fileID: 0}
 --- !u!1 &424887054
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,6 +2410,7 @@ MonoBehaviour:
   _MAX_TIME: 300
   _current_time: 0
   width: 1400
+  endWidth: 140
 --- !u!1 &812685248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2387,6 +2422,7 @@ GameObject:
   - component: {fileID: 812685250}
   - component: {fileID: 812685249}
   - component: {fileID: 812685251}
+  - component: {fileID: 812685252}
   m_Layer: 6
   m_Name: Stonecutter
   m_TagString: Untagged
@@ -2490,6 +2526,22 @@ PolygonCollider2D:
       - {x: 0.07124905, y: 0.048307598}
       - {x: -0.34528208, y: -0.20217544}
       - {x: -0.07419476, y: -0.36963555}
+--- !u!114 &812685252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812685248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ff3e99a4117c74c88515b851cfb891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hand: {fileID: 1865596520}
+  small: {fileID: 0}
+  mideum: {fileID: 0}
+  large: {fileID: 0}
 --- !u!1 &822900159
 GameObject:
   m_ObjectHideFlags: 0
@@ -3983,6 +4035,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1855887773}
   m_CullTransparentMesh: 1
+--- !u!1 &1865596520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 38336168, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+  m_PrefabInstance: {fileID: 916322949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1942393197 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 840899400817964747, guid: 282b30dde737e8241a9038d2d778e712, type: 3}

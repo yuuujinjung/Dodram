@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.esotericsoftware.spine.urp-shaders": {
-      "version": "file:C:/Desktop/2-2/xr/com.esotericsoftware.spine.urp-shaders-4.1-Unity2019.3-2022-09-02/com.esotericsoftware.spine.urp-shaders-4.1-2019.1",
+      "version": "file:../Assets/Spine/com.esotericsoftware.spine.urp-shaders-4.1-2019.1",
       "depth": 0,
       "source": "local",
       "dependencies": {
