@@ -12,6 +12,7 @@ public class PickUpScript : MonoBehaviour
     public Vector3 boxTransform;
     public LayerMask whatIsLayer;
     public GameObject Hand;
+    GameObject changeHold;
 
     public bool isHold;
 
@@ -103,95 +104,138 @@ public class PickUpScript : MonoBehaviour
         }
         
         
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift))
         {
-            if (isHold == true)
+            if (hit != null)
+            {   
+                if (isHold == true)
+                {
+                    if (Hand.transform.GetChild(0).name == "Axe") //나무 캐기
+                    {
+                        if (hit.CompareTag("Tree"))
+                        {
+                            GaugePer += diggingSpd * Time.deltaTime;
+                            if (GaugePer >= 100)
+                            {
+                                hit.GetComponent<FarmingObject>().Digging();
+                                GaugePer = 0.0f;
+                            }
+                        }
+                    }
+                    else if (Hand.transform.GetChild(0).name == "PickAxe") //돌 캐기
+                    {
+                        if (hit.CompareTag("Stone"))
+                        {
+                            GaugePer += diggingSpd * Time.deltaTime;
+                            if (GaugePer >= 100)
+                            {
+                                hit.GetComponent<FarmingObject>().Digging();
+                                GaugePer = 0.0f;
+                            }
+                        }
+                    }
+                    else if (Hand.transform.GetChild(0).name == "Scythe")   //풀 베기
+                    {
+                        if (hit.CompareTag("Grass"))
+                        {
+                            GaugePer += diggingSpd * Time.deltaTime;
+                            if (GaugePer >= 100)
+                            {
+                                hit.GetComponent<FarmingObject>().Digging();
+                                GaugePer = 0.0f;
+                            }
+                        }
+                    }
+                    else if (Hand.transform.GetChild(0).name == "wood")  //나무 기계에 넣기
+                    {
+                        if (hit.gameObject.name == "Sawmill")
+                        {
+                            hit.GetComponent<MachineScript>().SubCount();
+                            isHold = false;
+                        }
+
+                    }
+                    else if (Hand.transform.GetChild(0).name == "cobblestone")  //돌 기계에 넣기
+                    {
+                        if (hit.gameObject.name == "Stonecutter")
+                        {
+                            hit.GetComponent<MachineScript>().SubCount();
+                            isHold = false;
+                        }
+                    }
+                    else if (Hand.transform.GetChild(0).name == "chip")     //풀 기계에 넣기
+                    {
+                        if (hit.gameObject.name == "Mill")
+                        {
+                            hit.GetComponent<MachineScript>().SubCount();
+                            isHold = false;
+                        }
+                    }
+                }
+                else
+                {
+
+                }
+            }
+            else
             {
-                Hand.transform.GetChild(0).gameObject.layer = 6;
-                Hand.transform.DetachChildren();
-                isHold = false;
-                return;
+                if (isHold == true)
+                {
+
+                }
+                else
+                {
+
+                }
             }
         }
-
-        if (hit != null)
+        else if(Input.GetKeyUp(KeyCode.LeftShift))
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            GaugePer = 0.0f;
+        }
+        else if(Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            if (hit != null)
             {
-                if (hit.CompareTag("tool") || hit.CompareTag("item"))
+                if (isHold == true)
                 {
-                    hit.gameObject.transform.SetParent(Hand.transform);
-                    hit.transform.localPosition = Vector2.zero;
-                    hit.gameObject.layer = 0; //Default
-                    isHold = true;
+                    if (hit.CompareTag("tool") || hit.CompareTag("item"))
+                    {
+                        //바꾸기
+                        changeHold = hit.gameObject;
+                        Hand.transform.DetachChildren();
+                        changeHold.transform.SetParent(Hand.transform);
+                        changeHold.transform.localPosition = Vector2.zero;
+                        changeHold.layer = 0;
+                    }
+                }
+                else
+                {
+                    if (hit.CompareTag("tool") || hit.CompareTag("item"))
+                    {
+                        //들기
+                        hit.gameObject.transform.SetParent(Hand.transform);
+                        hit.transform.localPosition = Vector2.zero;
+                        hit.gameObject.layer = 0; //Default
+                        isHold = true;
+                    }
                 }
             }
-            
-            if (isHold == true)
+            else
             {
-                if (Hand.transform.GetChild(0).name == "Axe")
+                if (isHold == true)
                 {
-                    if (hit.CompareTag("Tree"))
-                    {
-                        if (Input.GetKey(KeyCode.LeftControl))
-                        {
-                            GaugePer += diggingSpd * Time.deltaTime;
-                            if (GaugePer >= 100)
-                            {
-                                hit.GetComponent<FarmingObject>().Digging();
-                                GaugePer = 0.0f;
-                            }
-                        }
-                        else
-                        {
-                            GaugePer = 0.0f;
-                        }
-                    }
+                    //놓기
+                    Hand.transform.GetChild(0).gameObject.layer = 6;
+                    Hand.transform.DetachChildren();
+                    isHold = false;
+                    return;
                 }
-                
-                if (Hand.transform.GetChild(0).name == "PickAxe")
+                else
                 {
-                    if (hit.CompareTag("Stone"))
-                    {
-                        if (Input.GetKey(KeyCode.LeftControl))
-                        {
-                            GaugePer += diggingSpd * Time.deltaTime;
-                            if (GaugePer >= 100)
-                            {
-                                hit.GetComponent<FarmingObject>().Digging();
-                                GaugePer = 0.0f;
-                            }
-                        }
-                        else
-                        {
-                            GaugePer = 0.0f;
-                        }
-                    }
 
                 }
-                if (Hand.transform.GetChild(0).name == "Scythe")
-                {
-                    if (hit.CompareTag("Grass"))
-                    {
-                        if (Input.GetKey(KeyCode.LeftControl))
-                        {
-                            GaugePer += diggingSpd * Time.deltaTime;
-                            if (GaugePer >= 100)
-                            {
-                                hit.GetComponent<FarmingObject>().Digging();
-                                GaugePer = 0.0f;
-                            }
-                        }
-                        else
-                        {
-                            GaugePer = 0.0f;
-                        }
-                    }
-
-                }   
             }
-
         }
     }
 }
