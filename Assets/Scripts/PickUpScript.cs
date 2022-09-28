@@ -143,6 +143,10 @@ public class PickUpScript : MonoBehaviour
                                 GaugePer = 0.0f;
                             }
                         }
+                        else
+                        {
+                            GaugePer = 0.0f;
+                        }
                     }
                 }
                 
@@ -159,6 +163,10 @@ public class PickUpScript : MonoBehaviour
                                 GaugePer = 0.0f;
                             }
                         }
+                        else
+                        {
+                            GaugePer = 0.0f;
+                        }
                     }
 
                 }
@@ -174,6 +182,10 @@ public class PickUpScript : MonoBehaviour
                                 hit.GetComponent<FarmingObject>().Digging();
                                 GaugePer = 0.0f;
                             }
+                        }
+                        else
+                        {
+                            GaugePer = 0.0f;
                         }
                     }
 
