@@ -80,6 +80,9 @@ namespace Spine.Unity.Editor {
 		internal const bool DEFAULT_SHOW_HIERARCHY_ICONS = true;
 		public bool showHierarchyIcons = DEFAULT_SHOW_HIERARCHY_ICONS;
 
+		internal const bool DEFAULT_RELOAD_AFTER_PLAYMODE = true;
+		public bool reloadAfterPlayMode = DEFAULT_RELOAD_AFTER_PLAYMODE;
+
 		internal const bool DEFAULT_SET_TEXTUREIMPORTER_SETTINGS = true;
 		public bool setTextureImporterSettings = DEFAULT_SET_TEXTUREIMPORTER_SETTINGS;
 
@@ -162,6 +165,9 @@ namespace Spine.Unity.Editor {
 		internal const bool DEFAULT_COMPONENTMATERIAL_WARNING = true;
 		public bool componentMaterialWarning = DEFAULT_COMPONENTMATERIAL_WARNING;
 
+		internal const bool DEFAULT_SKELETONDATA_ASSET_NO_FILE_ERROR = true;
+		public bool skeletonDataAssetNoFileError = DEFAULT_SKELETONDATA_ASSET_NO_FILE_ERROR;
+
 		public const float DEFAULT_MIPMAPBIAS = -0.5f;
 
 		public const bool DEFAULT_AUTO_RELOAD_SCENESKELETONS = true;
@@ -208,6 +214,7 @@ namespace Spine.Unity.Editor {
 #if HAS_ON_POSTPROCESS_PREFAB
 			SkeletonRenderer.fixPrefabOverrideViaMeshFilterGlobal = settings.fixPrefabOverrideViaMeshFilter;
 #endif
+			SkeletonDataAsset.errorIfSkeletonFileNullGlobal = settings.skeletonDataAssetNoFileError;
 			return settings;
 		}
 
@@ -258,6 +265,7 @@ namespace Spine.Unity.Editor {
 				}
 
 				EditorGUILayout.PropertyField(settings.FindProperty("autoReloadSceneSkeletons"), new GUIContent("Auto-reload scene components", "Reloads Skeleton components in the scene whenever their SkeletonDataAsset is modified. This makes it so changes in the SkeletonData asset inspector are immediately reflected. This may be slow when your scenes have large numbers of SkeletonRenderers or SkeletonGraphic."));
+				EditorGUILayout.PropertyField(settings.FindProperty("reloadAfterPlayMode"), new GUIContent("Reload SkeletonData after Play", "When enabled, the shared SkeletonData of all skeletons in the active scene is reloaded (from the .json or .skel.bytes file) after exiting play-mode. This may add undesired delays, but prevents (accidental) modifications to the shared SkeletonData during play-mode carrying over its effect into subsequent plays."));
 
 				EditorGUILayout.Separator();
 				EditorGUILayout.LabelField("Auto-Import Settings", EditorStyles.boldLabel);
@@ -294,6 +302,8 @@ namespace Spine.Unity.Editor {
 					EditorGUILayout.PropertyField(settings.FindProperty("atlasTxtImportWarning"), new GUIContent("Atlas & Skel Extension Warning", "Log a warning and recommendation whenever a `.atlas` or `.skel` file is found."));
 					EditorGUILayout.PropertyField(settings.FindProperty("textureImporterWarning"), new GUIContent("Texture Settings Warning", "Log a warning and recommendation whenever Texture Import Settings are detected that could lead to undesired effects, e.g. white border artifacts."));
 					EditorGUILayout.PropertyField(settings.FindProperty("componentMaterialWarning"), new GUIContent("Component & Material Warning", "Log a warning and recommendation whenever Component and Material settings are not compatible."));
+					EditorGUILayout.PropertyField(settings.FindProperty("skeletonDataAssetNoFileError"), new GUIContent("SkeletonDataAsset no file Error", "Log an error when querying SkeletonData from SkeletonDataAsset with no json or binary file assigned."));
+					SkeletonDataAsset.errorIfSkeletonFileNullGlobal = settings.FindProperty("skeletonDataAssetNoFileError").boolValue;
 				}
 
 				EditorGUILayout.Space();
