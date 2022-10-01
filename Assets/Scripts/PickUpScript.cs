@@ -203,6 +203,7 @@ public class PickUpScript : MonoBehaviour
                     {
                         //¹Ù²Ù±â
                         changeHold = hit.gameObject;
+                        Hand.transform.GetChild(0).gameObject.layer = 6;
                         Hand.transform.DetachChildren();
                         changeHold.transform.SetParent(Hand.transform);
                         changeHold.transform.localPosition = Vector2.zero;
