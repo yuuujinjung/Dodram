@@ -71,6 +71,7 @@ public class PickUpScript : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapBox(transform.position+ boxTransform, size, 0, whatIsLayer);
 
+        //d
         if (Physics2D.OverlapBox(transform.position+ boxTransform, size, 0, whatIsLayer) == null)
         {
             if(targetObject != null) 

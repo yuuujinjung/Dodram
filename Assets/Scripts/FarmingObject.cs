@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class FarmingObject : MonoBehaviour
 {
     public GameObject dropItem;
+    private GameObject prefab_obj;
     
     public void Digging()
     {
-        Instantiate(dropItem).transform.position = this.transform.position;
+        prefab_obj = Instantiate(dropItem);
+        prefab_obj.transform.position = this.transform.position;
+        prefab_obj.name = dropItem.name;
         
         Destroy(gameObject);
     }
