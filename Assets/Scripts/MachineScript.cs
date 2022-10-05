@@ -24,7 +24,6 @@ public class MachineScript : MonoBehaviour
     {
         DestroyCountDown();
         CraftCountDown();
-        Crafting();
         ItemDestroy();
     }
 
@@ -41,12 +40,12 @@ public class MachineScript : MonoBehaviour
 
     public void CraftOn()
     {
-        craftStart = true;
+        Invoke("Crafting", 10);
     }
 
     public void Crafting()      //¡¶¿€
     {
-        if(CraftTime <= 0)
+        if(CraftTime <= 10)
         {
             if (this.gameObject.transform.childCount == 3)
             {
