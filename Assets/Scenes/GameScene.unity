@@ -359,7 +359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ca22837611a2244831e6e9cf78e7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 20
   player: {fileID: 1528753261}
 --- !u!1 &167645581
 GameObject:
@@ -2353,6 +2352,7 @@ MonoBehaviour:
   _MAX_TIME: 300
   _current_time: 0
   width: 1400
+  endWidth: 140
 --- !u!1 &812685248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2852,7 +2852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1411386445
 Transform:
   m_ObjectHideFlags: 0
@@ -2861,7 +2861,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411386444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2949,6 +2949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd1e3cc66b071242ac540edc1972b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 4
 --- !u!114 &1411386451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2969,8 +2970,8 @@ MonoBehaviour:
   Hand: {fileID: 1848676923}
   isHold: 0
   GaugePer: 0
-  prfGaugeBar: {fileID: 0}
-  canvas: {fileID: 0}
+  prfGaugeBar: {fileID: 6077395782407935344, guid: 21b0a8999c7a9034d9217db9436dea06, type: 3}
+  canvas: {fileID: 1460329472}
   height: 1.7
   diggingSpd: 0
   targetObject: {fileID: 0}
@@ -3572,6 +3573,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: c040a39196a878e47a97d73da31e1c50, type: 2}
+  initialSkinName: 
+  fixPrefabOverrideViaMeshFilter: 2
+  initialFlipX: 0
+  initialFlipY: 0
+  updateWhenInvisible: 3
+  separatorSlotNames: []
+  zSpacing: 0
+  useClipping: 1
+  immutableTriangles: 0
+  pmaVertexColors: 1
+  clearStateOnDisable: 0
+  tintBlack: 0
+  singleSubmesh: 0
+  fixDrawOrder: 0
+  addNormals: 0
+  calculateTangents: 0
+  maskInteraction: 0
+  maskMaterials:
+    materialsMaskDisabled: []
+    materialsInsideMask: []
+    materialsOutsideMask: []
+  disableRenderingOnOverride: 1
+  updateTiming: 1
+  unscaledTime: 0
+  _animationName: 
+  loop: 0
+  timeScale: 1
 --- !u!23 &1796005237
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3591,8 +3620,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 551451683b5eea048b43bc36d7e7ec80, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3683,7 +3711,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -40.00006, y: 55}
+  m_AnchoredPosition: {x: -40, y: 55}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1855887775
