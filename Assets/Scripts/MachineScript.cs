@@ -5,75 +5,87 @@ using UnityEngine.UI;
 
 public class MachineScript : MonoBehaviour
 {
-    PickUpScript pickUpScript;
     //public GameObject Hand;
-    public GameObject small;
-    public GameObject mideum;
-    public GameObject large;
+    public GameObject artefact;
     GameObject itemCount;
 
-    public float timeLimit = 1;
-    bool timeStart;
+    public float DestroyTime = 1;
+    public float CraftTime = 1;
+    bool destroyStart;
+    bool craftStart;
 
     private void Awake()
     {
-        pickUpScript = GameObject.Find("Player").GetComponent<PickUpScript>();
-        timeLimit = 60;
+        DestroyTime = 60;
+        CraftTime = 10;
     }
 
     private void Update()
     {
-        CountDown();
+        DestroyCountDown();
+        CraftCountDown();
+        Crafting();
         ItemDestroy();
     }
 
-    public void SubCount()
+    public void SubCount(GameObject hand)      //기계에 넣기
     {
         if(this.transform.childCount == 0)
         {
-            timeStart = true;
+            destroyStart = true;
         }
-        itemCount = pickUpScript.Hand.transform.GetChild(0).gameObject;
+        itemCount = hand.transform.GetChild(0).gameObject;
         itemCount.transform.SetParent(this.transform);
         itemCount.SetActive(false);
-        pickUpScript.isHold = false;
     }
 
-    public void Crafting()
+    public void CraftOn()
     {
-        if (this.gameObject.transform.childCount == 1)
+        craftStart = true;
+    }
+
+    public void Crafting()      //제작
+    {
+        if(CraftTime <= 0)
         {
-            Instantiate(small).transform.position = this.transform.position;
-        }
-        else if (this.gameObject.transform.childCount == 2)
-        {
-            Instantiate(mideum).transform.position = this.transform.position;
-        }
-        else if (this.gameObject.transform.childCount == 3)
-        {
-            Instantiate(large).transform.position = this.transform.position;
+            if (this.gameObject.transform.childCount == 3)
+            {
+                Instantiate(artefact, new Vector3(
+                            this.transform.position.x,
+                            this.transform.position.y - 0.5f,
+                            this.transform.position.z),
+                            this.transform.rotation);
+            }
         }
     }
 
     public void ItemDestroy()
     {
-        if(timeLimit <= 0)
+        if (DestroyTime <= 0)
         {
             for (int a = 0; a < this.transform.childCount; a++)
             {
                 Destroy(this.transform.GetChild(a).gameObject);
             }
             this.transform.DetachChildren();
-            timeStart = false;
-            timeLimit = 20;
+            destroyStart = false;
+            DestroyTime = 60;
         }
     }
 
-    public void CountDown()
+    public void DestroyCountDown()
     {
-        if (timeStart == true)
+        if (destroyStart == true)
         {
-            timeLimit -= Time.deltaTime;
+            DestroyTime -= Time.deltaTime;
+        }
+    }
+
+    public void CraftCountDown()
+    {
+        if (craftStart == true)
+        {
+            CraftTime -= Time.deltaTime;
         }
     }
 }

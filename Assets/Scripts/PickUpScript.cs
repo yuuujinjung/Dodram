@@ -130,47 +130,11 @@ public class PickUpScript : MonoBehaviour
             {   
                 if (isHold == true)
                 {
-                    //if (Hand.transform.GetChild(0).name == "Axe") //나무 캐기
-                    //{
-                    //    if (hit.CompareTag("Tree"))
-                    //    {
-                    //        GaugePer += diggingSpd * Time.deltaTime;
-                    //        if (GaugePer >= 100)
-                    //        {
-                    //            hit.GetComponent<FarmingObject>().Digging();
-                    //            GaugePer = 0.0f;
-                    //        }
-                    //    }
-                    //}
-                    //else if (Hand.transform.GetChild(0).name == "PickAxe") //돌 캐기
-                    //{
-                    //    if (hit.CompareTag("Stone"))
-                    //    {
-                    //        GaugePer += diggingSpd * Time.deltaTime;
-                    //        if (GaugePer >= 100)
-                    //        {
-                    //            hit.GetComponent<FarmingObject>().Digging();
-                    //            GaugePer = 0.0f;
-                    //        }
-                    //    }
-                    //}
-                    //else if (Hand.transform.GetChild(0).name == "Scythe")   //풀 베기
-                    //{
-                    //    if (hit.CompareTag("Grass"))
-                    //    {
-                    //        GaugePer += diggingSpd * Time.deltaTime;
-                    //        if (GaugePer >= 100)
-                    //        {
-                    //            hit.GetComponent<FarmingObject>().Digging();
-                    //            GaugePer = 0.0f;
-                    //        }
-                    //    }
-                    //}
                     if (Hand.transform.GetChild(0).name == "wood")  //나무 기계에 넣기
                     {
                         if (hit.gameObject.name == "Sawmill")
                         {
-                            hit.GetComponent<MachineScript>().SubCount();
+                            hit.GetComponent<MachineScript>().SubCount(Hand);
                             isHold = false;
                         }
 
@@ -179,7 +143,7 @@ public class PickUpScript : MonoBehaviour
                     {
                         if (hit.gameObject.name == "Stonecutter")
                         {
-                            hit.GetComponent<MachineScript>().SubCount();
+                            hit.GetComponent<MachineScript>().SubCount(Hand);
                             isHold = false;
                         }
                     }
@@ -187,14 +151,25 @@ public class PickUpScript : MonoBehaviour
                     {
                         if (hit.gameObject.name == "Mill")
                         {
-                            hit.GetComponent<MachineScript>().SubCount();
+                            hit.GetComponent<MachineScript>().SubCount(Hand);
                             isHold = false;
                         }
                     }
                 }
                 else
                 {
-
+                    if(hit.gameObject.name == "Sawmill")
+                    {
+                        hit.GetComponent<MachineScript>().CraftOn();
+                    }
+                    else if(hit.gameObject.name == "Stinecutter")
+                    {
+                        hit.GetComponent<MachineScript>().CraftOn();
+                    }
+                    else if (hit.gameObject.name == "Mill")
+                    {
+                        hit.GetComponent<MachineScript>().CraftOn();
+                    }
                 }
             }
             else
@@ -264,9 +239,8 @@ public class PickUpScript : MonoBehaviour
             {
                 if (isHold == true)
                 {
-                    if (hit.CompareTag("tool") || hit.CompareTag("item"))
+                    if (hit.CompareTag("tool") || hit.CompareTag("item") || hit.CompareTag("artefact"))       //바꾸기
                     {
-                        //바꾸기
                         changeHold = hit.gameObject;
                         Hand.transform.GetChild(0).gameObject.layer = 6;
                         Hand.transform.DetachChildren();
@@ -277,9 +251,8 @@ public class PickUpScript : MonoBehaviour
                 }
                 else
                 {
-                    if (hit.CompareTag("tool") || hit.CompareTag("item"))
+                    if (hit.CompareTag("tool") || hit.CompareTag("item") || hit.CompareTag("artefact"))       //들기
                     {
-                        //들기
                         hit.gameObject.transform.SetParent(Hand.transform);
                         hit.transform.localPosition = Vector2.zero;
                         hit.gameObject.layer = 0; //Default
@@ -289,9 +262,8 @@ public class PickUpScript : MonoBehaviour
             }
             else
             {
-                if (isHold == true)
+                if (isHold == true)                                             //놓기
                 {
-                    //놓기
                     Hand.transform.GetChild(0).gameObject.layer = 6;
                     Hand.transform.DetachChildren();
                     isHold = false;
