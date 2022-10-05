@@ -1,9 +1,20 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: 30918bcaadaaecc42bc215ff52f75b21
 folderAsset: yes
 timeCreated: 1488288531
 licenseType: Free
 DefaultImporter:
+=======
+<<<<<<< Updated upstream:Assets/Spine/Spine Examples/Other Examples/Outline Shaders.unity.meta
+guid: 1119a9b52a74de2469d4b8fa5feb4c83
+=======
+guid: e6f76dd02e002f2429b5590a4320c640
+folderAsset: yes
+>>>>>>> Stashed changes:Assets/Spine.meta
+DefaultImporter:
+  externalObjects: {}
+>>>>>>> Stashed changes
   userData: 
   assetBundleName: 
   assetBundleVariant: 

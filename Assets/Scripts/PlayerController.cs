@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _characterRigidbody;
     private Vector2 _movement;
 
+    public bool MainPlayer;
 
     Animator _animator;
     string _animationState = "AnimationState";
@@ -39,18 +40,27 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-            Movement();
+        Movement();
     }
 
     private void Movement()
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            _characterRigidbody.AddForce(_characterRigidbody.velocity *dashPower, ForceMode2D.Impulse);
+            _characterRigidbody.AddForce(_characterRigidbody.velocity * dashPower, ForceMode2D.Impulse);
             return;
         }
-        _movement.x = Input.GetAxisRaw("Horizontal");
-        _movement.y = Input.GetAxisRaw("Vertical");
+
+        if (MainPlayer)
+        {
+            _movement.x = Input.GetAxisRaw("Horizontal2");
+            _movement.y = Input.GetAxisRaw("Vertical2");   
+        }
+        else
+        {
+            _movement.x = Input.GetAxisRaw("Horizontal");
+            _movement.y = Input.GetAxisRaw("Vertical");   
+        }
 
         _movement.Normalize();
 
