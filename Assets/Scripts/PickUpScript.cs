@@ -34,6 +34,13 @@ public class PickUpScript : MonoBehaviour
     [SerializeField] private Material whiteMaterial;
     [SerializeField] private Material originalMaterial;
 
+    private KeyCode[] ArrayInteractiveKey = new KeyCode[] { KeyCode.LeftShift, KeyCode.RightShift };
+
+    private KeyCode[] ArrayPickupKey = new KeyCode[] { KeyCode.LeftControl, KeyCode.RightControl };
+
+    private KeyCode InteractiveKey;
+    private KeyCode PickupKey;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +48,17 @@ public class PickUpScript : MonoBehaviour
         GaugePer = 0.0f;
         gaugeBar = Instantiate(prfGaugeBar, canvas.transform).GetComponent<RectTransform>();
         nowGaugebar = gaugeBar.transform.GetChild(0).GetComponent<Image>();
+
+        if (this.GetComponent<PlayerController>().MainPlayer)
+        {
+            InteractiveKey = ArrayInteractiveKey[0];
+            PickupKey = ArrayPickupKey[0];
+        }
+        else 
+        {
+            InteractiveKey = ArrayInteractiveKey[1];
+            PickupKey = ArrayPickupKey[1];
+        }
     }
     
     // Update is called once per frame
@@ -106,7 +124,7 @@ public class PickUpScript : MonoBehaviour
         }
         
         
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if(Input.GetKeyDown(InteractiveKey))
         {
             if (hit != null)
             {   
@@ -191,7 +209,7 @@ public class PickUpScript : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKey(InteractiveKey))
         {
             if (hit != null)
             {
@@ -236,11 +254,11 @@ public class PickUpScript : MonoBehaviour
                 }
             }
         }
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        else if(Input.GetKeyUp(InteractiveKey))
         {
             GaugePer = 0.0f;
         }
-        else if(Input.GetKeyDown(KeyCode.LeftControl))
+        else if(Input.GetKeyDown(PickupKey))
         {
             if (hit != null)
             {

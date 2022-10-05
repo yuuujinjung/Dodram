@@ -11,9 +11,9 @@ public class MultipleTargetCamera : MonoBehaviour
     public Vector3 offset;
     public float smoothTime = .5f;
 
-    public float minZoom = 40f;
-    public float maxZoom = 10f;
-    public float zoomLimiter = 50f;
+    public float minZoom = 10f;
+    public float maxZoom = 6f;
+    public float zoomLimiter = 10f;
 
     private Vector3 velocity;
     private Camera cam;
