@@ -1,90 +1,147 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MachineScript : MonoBehaviour
 {
     //public GameObject Hand;
-    public GameObject artefact;
-    GameObject itemCount;
+    
+    public float craftTime;
+    public float destroyTime;
+    public float workTime;
 
-    public float DestroyTime = 1;
-    public float CraftTime = 1;
-    bool destroyStart;
-    bool craftStart;
-
-    private void Awake()
+    public enum MachineState
     {
-        DestroyTime = 60;
-        CraftTime = 10;
+        None,
+        Working,
+        Destroying
+    }
+
+    public MachineState state;
+
+    public GameObject[] productionArray;
+    
+    
+    public GameObject prfGaugeBar;
+    public GameObject canvas;
+    private RectTransform gaugeBar;
+    public float height = 0.0f;
+    private Image nowGaugebar;
+    
+    
+    private void Start()
+    {
+        gaugeBar = Instantiate(prfGaugeBar, canvas.transform).GetComponent<RectTransform>();
+        nowGaugebar = gaugeBar.transform.GetChild(0).GetComponent<Image>();
+        state = MachineState.None;
     }
 
     private void Update()
     {
-        DestroyCountDown();
-        CraftCountDown();
-        ItemDestroy();
-    }
-
-    public void SubCount(GameObject hand)      //기계에 넣기
-    {
-        if(this.transform.childCount == 0)
+        GaugeBar();
+        if (state != MachineState.None)
         {
-            destroyStart = true;
+            workTime += Time.deltaTime;
         }
-        itemCount = hand.transform.GetChild(0).gameObject;
-        itemCount.transform.SetParent(this.transform);
-        itemCount.SetActive(false);
-    }
-
-    public void CraftOn()
-    {
-        Invoke("Crafting", 10);
-    }
-
-    public void Crafting()      //제작
-    {
-        if(CraftTime <= 10)
+        
+        
+        if (state == MachineState.Destroying)
         {
-            if (this.gameObject.transform.childCount == 3)
+            if (workTime >= destroyTime)
             {
-                Instantiate(artefact, new Vector3(
-                            this.transform.position.x,
-                            this.transform.position.y - 0.5f,
-                            this.transform.position.z),
-                            this.transform.rotation);
+                ChildDestroy();
+                state = MachineState.None;
+                workTime = 0;
             }
         }
+        
+    }
+    
+    void GaugeBar()
+    {
+        Vector3 _gaugeBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + height, 0));
+        gaugeBar.position = _gaugeBarPos;
+
+        if (state == MachineState.None)
+        {
+            gaugeBar.gameObject.SetActive(false);
+        }
+        else
+        {
+            gaugeBar.gameObject.SetActive(true);
+        }
+
+        if (state == MachineState.Working)
+        {
+            nowGaugebar.fillAmount = workTime / craftTime;   
+            nowGaugebar.color= Color.white;
+        }
+        else if (state == MachineState.Destroying)
+        {
+            nowGaugebar.fillAmount = workTime / destroyTime;  
+            nowGaugebar.color= Color.red;
+        }
+        
     }
 
-    public void ItemDestroy()
+    public void SubCount(GameObject hand)      //기계에 넣기 
     {
-        if (DestroyTime <= 0)
+        if (this.transform.childCount < productionArray.Length)
         {
-            for (int a = 0; a < this.transform.childCount; a++)
-            {
-                Destroy(this.transform.GetChild(a).gameObject);
-            }
-            this.transform.DetachChildren();
-            destroyStart = false;
-            DestroyTime = 60;
+            GameObject playerItem;
+            playerItem = hand.transform.GetChild(0).gameObject;
+            playerItem.transform.SetParent(this.transform);
+            playerItem.SetActive(false);   
+        }
+        
+    }
+
+    public void CraftOn()   //제작 시작
+    {
+        if (state == MachineState.None)
+        {
+            Invoke("Crafting", craftTime);
+            state = MachineState.Working;
         }
     }
 
-    public void DestroyCountDown()
+    public void PickUp(GameObject hand) //꺼내기
     {
-        if (destroyStart == true)
+        if (state == MachineState.Destroying)
         {
-            DestroyTime -= Time.deltaTime;
+            CreateDone(hand);
         }
     }
 
-    public void CraftCountDown()
+    public void Crafting()      //제작완성 및 삭제중 상태로 이동
     {
-        if (craftStart == true)
-        {
-            CraftTime -= Time.deltaTime;
-        }
+        state = MachineState.Destroying;
+        workTime = 0;
     }
+    
+
+    public void CreateDone(GameObject hand)    //완성품 배출
+    {
+        var go =Instantiate(productionArray[transform.childCount-1], Vector2.zero, quaternion.identity);
+        go.transform.SetParent(hand.transform);
+        go.transform.localPosition = Vector2.zero;
+        go.layer = 0;
+        state = MachineState.None;
+        workTime = 0;
+        ChildDestroy();
+    }
+
+     public void ChildDestroy()
+     {
+         for (int i = 0; i < this.transform.childCount; i++)
+         { 
+             Destroy(this.transform.GetChild(i).gameObject);
+         }
+     } //자식 삭제
+     
+
+
 }

@@ -13,8 +13,7 @@ public class PickUpScript : MonoBehaviour
     public LayerMask whatIsLayer;
     public GameObject Hand;
     GameObject changeHold;
-
-
+    
     public bool isHold;
 
     [FormerlySerializedAs("DiggingPer")] public float GaugePer;
@@ -34,17 +33,17 @@ public class PickUpScript : MonoBehaviour
     [SerializeField] private Material whiteMaterial;
     [SerializeField] private Material originalMaterial;
 
-    private KeyCode[] ArrayInteractiveKey = new KeyCode[] { KeyCode.LeftShift, KeyCode.RightShift };
+    private KeyCode[] ArrayInteractiveKey = new KeyCode[] { KeyCode.LeftControl, KeyCode.RightControl };
+    private KeyCode[] ArrayPickupKey = new KeyCode[] { KeyCode.LeftShift, KeyCode.RightShift };
 
-    private KeyCode[] ArrayPickupKey = new KeyCode[] { KeyCode.LeftControl, KeyCode.RightControl };
-
-    private KeyCode InteractiveKey;
-    private KeyCode PickupKey;
+    [SerializeField] private KeyCode InteractiveKey;
+    [SerializeField] private KeyCode PickupKey;
     
     // Start is called before the first frame update
     void Start()
     {
         isHold = false;
+        
         GaugePer = 0.0f;
         gaugeBar = Instantiate(prfGaugeBar, canvas.transform).GetComponent<RectTransform>();
         nowGaugebar = gaugeBar.transform.GetChild(0).GetComponent<Image>();
@@ -65,7 +64,19 @@ public class PickUpScript : MonoBehaviour
     void Update()
     {
         Interactive(); //상호작용
+        GaugeBar(); //게이지 바
+        if (Hand.transform.childCount != 0)
+        {
+            isHold = true;
+        }
+        else
+        {
+            isHold = false;
+        }
+    }
 
+    void GaugeBar()
+    {
         Vector3 _gaugeBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + height, 0));
         gaugeBar.position = _gaugeBarPos;
 
@@ -91,7 +102,9 @@ public class PickUpScript : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapBox(transform.position+ boxTransform, size, 0, whatIsLayer);
 
-        //d
+        //---------------------------------------
+        //  머터리얼 and 채칩 게이지 초기화
+        //---------------------------------------
         if (Physics2D.OverlapBox(transform.position+ boxTransform, size, 0, whatIsLayer) == null)
         {
             if(targetObject != null) 
@@ -122,9 +135,11 @@ public class PickUpScript : MonoBehaviour
             }
             GaugePer = 0.0f;
         }
-        
-        
-        if(Input.GetKeyDown(InteractiveKey))
+
+        //---------------------------------------
+        //  기계에 재료 넣기 & 실행시키기
+        //---------------------------------------
+        if(Input.GetKeyDown(PickupKey))
         {
             if (hit != null)
             {   
@@ -135,7 +150,6 @@ public class PickUpScript : MonoBehaviour
                         if (hit.gameObject.name == "Sawmill")
                         {
                             hit.GetComponent<MachineScript>().SubCount(Hand);
-                            isHold = false;
                         }
 
                     }
@@ -144,7 +158,6 @@ public class PickUpScript : MonoBehaviour
                         if (hit.gameObject.name == "Stonecutter")
                         {
                             hit.GetComponent<MachineScript>().SubCount(Hand);
-                            isHold = false;
                         }
                     }
                     else if (Hand.transform.GetChild(0).name == "chip")     //풀 기계에 넣기
@@ -152,7 +165,6 @@ public class PickUpScript : MonoBehaviour
                         if (hit.gameObject.name == "Mill")
                         {
                             hit.GetComponent<MachineScript>().SubCount(Hand);
-                            isHold = false;
                         }
                     }
                 }
@@ -160,9 +172,31 @@ public class PickUpScript : MonoBehaviour
                 {
                     if(hit.gameObject.name == "Sawmill")
                     {
+                        hit.GetComponent<MachineScript>().PickUp(Hand);
+                    }
+                    else if(hit.gameObject.name == "Stonecutter")
+                    {
+                        hit.GetComponent<MachineScript>().PickUp(Hand);
+                    }
+                    else if (hit.gameObject.name == "Mill")
+                    {
+                        hit.GetComponent<MachineScript>().PickUp(Hand);
+                    }
+                }
+            }
+        }
+
+        if (Input.GetKey(InteractiveKey))
+        {
+            if (hit != null)
+            {
+                if (isHold != true)
+                {
+                    if (hit.gameObject.name == "Sawmill")
+                    {
                         hit.GetComponent<MachineScript>().CraftOn();
                     }
-                    else if(hit.gameObject.name == "Stinecutter")
+                    else if (hit.gameObject.name == "Stonecutter")
                     {
                         hit.GetComponent<MachineScript>().CraftOn();
                     }
@@ -172,19 +206,12 @@ public class PickUpScript : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                if (isHold == true)
-                {
-
-                }
-                else
-                {
-
-                }
-            }
         }
-        else if (Input.GetKey(InteractiveKey))
+
+        //---------------------------------------
+        //  자원 캐기
+        //---------------------------------------
+        if (Input.GetKey(InteractiveKey))
         {
             if (hit != null)
             {
@@ -233,13 +260,19 @@ public class PickUpScript : MonoBehaviour
         {
             GaugePer = 0.0f;
         }
+        
+        
+        //---------------------------------------
+        //  아이템 픽업&픽다운
+        //---------------------------------------
         else if(Input.GetKeyDown(PickupKey))
         {
             if (hit != null)
             {
                 if (isHold == true)
                 {
-                    if (hit.CompareTag("tool") || hit.CompareTag("item") || hit.CompareTag("artefact"))       //바꾸기
+                    if (hit.CompareTag("tool") || hit.CompareTag("item"))       
+                        //바꾸기
                     {
                         changeHold = hit.gameObject;
                         Hand.transform.GetChild(0).gameObject.layer = 6;
@@ -251,27 +284,23 @@ public class PickUpScript : MonoBehaviour
                 }
                 else
                 {
-                    if (hit.CompareTag("tool") || hit.CompareTag("item") || hit.CompareTag("artefact"))       //들기
+                    if (hit.CompareTag("tool") || hit.CompareTag("item"))       
+                        //들기
                     {
                         hit.gameObject.transform.SetParent(Hand.transform);
                         hit.transform.localPosition = Vector2.zero;
                         hit.gameObject.layer = 0; //Default
-                        isHold = true;
                     }
                 }
             }
             else
             {
-                if (isHold == true)                                             //놓기
+                if (isHold == true)
                 {
+                    //놓기
                     Hand.transform.GetChild(0).gameObject.layer = 6;
                     Hand.transform.DetachChildren();
-                    isHold = false;
                     return;
-                }
-                else
-                {
-
                 }
             }
         }
