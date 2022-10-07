@@ -81,7 +81,7 @@ public class MachineScript : MonoBehaviour
         }
         else if (state == MachineState.Destroying)
         {
-            nowGaugebar.fillAmount = workTime / destroyTime;  
+            nowGaugebar.fillAmount = 1 - (workTime / destroyTime);
             nowGaugebar.color= Color.red;
         }
         
