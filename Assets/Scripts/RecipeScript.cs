@@ -41,14 +41,15 @@ public class RecipeScript : MonoBehaviour
         }
 
         recipeText.text =
-            "<recipe>\n\n" +
+            "<레시피>\n\n" +
             ingredientlist +
-            "\n need to processing";
+            "\n레시피 이외의 재료는 들어가지 않습니다.";
     }
 
     public void RecipeSetting()
     {
-        randArray = GetRandomInt(needNum, 0, ingredientArray.Length);
+        // randArray = GetRandomInt(needNum, 0, ingredientArray.Length);
+        randArray = new[] { 1, 4, 7 }; //시연용 코드
         
         nowRecipe.Clear();
         

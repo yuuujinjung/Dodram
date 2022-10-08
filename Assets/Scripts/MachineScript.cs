@@ -101,7 +101,7 @@ public class MachineScript : MonoBehaviour
 
     public void CraftOn()   //제작 시작
     {
-        if (state == MachineState.None && this.transform.childCount != 0)
+        if (state == MachineState.None && this.transform.childCount != 0 &&this.transform.childCount == 2) //시연용 코드
         {
             Invoke("Crafting", craftTime);
             state = MachineState.Working;
