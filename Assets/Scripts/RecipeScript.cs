@@ -1,36 +1,91 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class RecipeScript : MonoBehaviour
 {
-    [SerializeField] private Text text_NeedItemName;
-    [SerializeField] private Text text_NeedItemNumber;
+    private int[] randArray;
+    
+    public GameObject[] ingredientArray;
 
-    [SerializeField] private GameObject go_BaseToolTip;
-
-    private void Clear()
+    public string[] ingredientStringArray;
+    
+    public int needNum;
+    public List<GameObject> nowRecipe = new List<GameObject>();
+    public TextMeshProUGUI recipeText;
+    
+    
+    private void Start()
     {
-        text_NeedItemName.text = "";
-        text_NeedItemNumber.text = "";
+        RecipeSetting();
+
     }
 
-    public void ShowTooltip(string[] _needItemName, int[] _needItemNumber)
+    private void Update()
     {
-        Clear();
-        go_BaseToolTip.SetActive(true); // 툴팁 UI 활성화
+        
+    }
 
-        for (int i = 0; i < _needItemNumber.Length; i++)
+    void RecipeTextUpdate()
+    {
+        string ingredientlist = "";
+        
+        for (int i = 0; i < randArray.Length; i++)
         {
-            text_NeedItemName.text += _needItemName[i] + "\n";
-            text_NeedItemNumber.text += " x " + _needItemNumber[i] + "\n";
+            ingredientlist += (ingredientStringArray[randArray[i]].ToString() + "\n");
         }
+
+        recipeText.text =
+            "<recipe>\n\n" +
+            ingredientlist +
+            "\n need to processing";
     }
 
-    public void HideToolTip()
+    public void RecipeSetting()
     {
-        Clear();
-        go_BaseToolTip.SetActive(false); // 툴팁 UI 비활성화
+        randArray = GetRandomInt(needNum, 0, ingredientArray.Length);
+        
+        nowRecipe.Clear();
+        
+        for (int i = 0; i < randArray.Length; i++)
+        {
+            nowRecipe.Add(ingredientArray[randArray[i]]);
+        }
+        RecipeTextUpdate();
     }
+
+    public int[] GetRandomInt(int length, int min, int max)
+    {
+        int[] randArray = new int[length];
+        bool isSame;
+
+        for (int i = 0; i < length; i++)
+        {
+            while (true)
+            {
+                randArray[i] = Random.Range(min, max);
+                isSame = false;
+
+                for (int j = 0; j < i; j++)
+                {
+                    if (randArray[j] == randArray[i])
+                    {
+                        isSame = true;
+                        break;
+                    }
+                }
+                if(!isSame) break;
+            }
+        }
+        return randArray;
+    }
+    
+    
+    
+    
 }

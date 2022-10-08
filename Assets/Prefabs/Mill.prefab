@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6790146530951848563}
   - component: {fileID: 6790146530951848524}
-  - component: {fileID: 6790146530951848525}
   - component: {fileID: 417080865}
+  - component: {fileID: 3475668764816430607}
   m_Layer: 6
   m_Name: Mill
   m_TagString: Untagged
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 6790146530951848526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.38, y: 1.66, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,9 +75,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 831cf16e829f3cc4a89c304cd34311e1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4d944f12ec2a235418cfe7c9f8215f5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.95, y: 0.96}
@@ -85,36 +85,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!60 &6790146530951848525
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6790146530951848526}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.57, y: 0.59}
-    newSize: {x: 0.95, y: 0.96}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.00048336387, y: -0.45013905}
-      - {x: 0.43988532, y: -0.19155839}
-      - {x: -0.020492725, y: 0.049990386}
-      - {x: -0.44561774, y: -0.19124472}
+  m_SpriteSortPoint: 1
 --- !u!114 &417080865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ff3e99a4117c74c88515b851cfb891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  craftTime: 3
+  craftTime: 10
   destroyTime: 10
   workTime: 0
   state: 0
@@ -137,4 +108,20 @@ MonoBehaviour:
   - {fileID: 7706093404112877944, guid: a130c2067d6a10b41b3a15cb86ed4358, type: 3}
   prfGaugeBar: {fileID: 6077395782407935344, guid: 21b0a8999c7a9034d9217db9436dea06, type: 3}
   canvas: {fileID: 0}
-  height: 0.8
+  height: 2
+--- !u!70 &3475668764816430607
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6790146530951848526}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.031104809, y: 0.32}
+  m_Size: {x: 1.5735209, y: 0.6315418}
+  m_Direction: 1

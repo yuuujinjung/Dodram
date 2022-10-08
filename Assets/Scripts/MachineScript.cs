@@ -89,7 +89,7 @@ public class MachineScript : MonoBehaviour
 
     public void SubCount(GameObject hand)      //기계에 넣기 
     {
-        if (this.transform.childCount < productionArray.Length)
+        if (this.transform.childCount < productionArray.Length && state == MachineState.None)
         {
             GameObject playerItem;
             playerItem = hand.transform.GetChild(0).gameObject;
@@ -101,7 +101,7 @@ public class MachineScript : MonoBehaviour
 
     public void CraftOn()   //제작 시작
     {
-        if (state == MachineState.None)
+        if (state == MachineState.None && this.transform.childCount != 0)
         {
             Invoke("Crafting", craftTime);
             state = MachineState.Working;
@@ -126,6 +126,13 @@ public class MachineScript : MonoBehaviour
     public void CreateDone(GameObject hand)    //완성품 배출
     {
         var go =Instantiate(productionArray[transform.childCount-1], Vector2.zero, quaternion.identity);
+
+        int index = go.name.IndexOf("(Clone)");
+        if (index > 0)
+        {
+            go.name = go.name.Substring(0, index);
+        }
+        
         go.transform.SetParent(hand.transform);
         go.transform.localPosition = Vector2.zero;
         go.layer = 0;
@@ -134,13 +141,13 @@ public class MachineScript : MonoBehaviour
         ChildDestroy();
     }
 
-     public void ChildDestroy()
+     public void ChildDestroy() //자식 삭제
      {
          for (int i = 0; i < this.transform.childCount; i++)
          { 
              Destroy(this.transform.GetChild(i).gameObject);
          }
-     } //자식 삭제
+     } 
      
 
 

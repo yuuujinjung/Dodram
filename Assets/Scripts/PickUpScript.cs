@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEditor.PackageManager;
 using UnityEngine.Serialization;
 
 public class PickUpScript : MonoBehaviour
@@ -167,9 +168,20 @@ public class PickUpScript : MonoBehaviour
                             hit.GetComponent<MachineScript>().SubCount(Hand);
                         }
                     }
+                    
+                    if (hit.gameObject.name == "Last_Machine")  //2차가공 기계에 넣기
+                    {
+                        hit.GetComponent<FinalMachineScript>().SubCount(Hand);
+                    }
+
+                    if (hit.gameObject.name == "House") //집에 2차가공 물건 넣기
+                    {
+                        hit.GetComponent<HouseScript>().Building(Hand);
+                    }
                 }
                 else
                 {
+                    //기계가 아이템을 다 만들었다면 꺼냄
                     if(hit.gameObject.name == "Sawmill")
                     {
                         hit.GetComponent<MachineScript>().PickUp(Hand);
@@ -182,6 +194,10 @@ public class PickUpScript : MonoBehaviour
                     {
                         hit.GetComponent<MachineScript>().PickUp(Hand);
                     }
+                    else if (hit.gameObject.name == "Last_Machine")
+                    {
+                        hit.GetComponent<FinalMachineScript>().PickUp(Hand);
+                    }
                 }
             }
         }
@@ -192,6 +208,7 @@ public class PickUpScript : MonoBehaviour
             {
                 if (isHold != true)
                 {
+                    //기계가 만들준비가 되었다면 제작
                     if (hit.gameObject.name == "Sawmill")
                     {
                         hit.GetComponent<MachineScript>().CraftOn();
@@ -203,6 +220,10 @@ public class PickUpScript : MonoBehaviour
                     else if (hit.gameObject.name == "Mill")
                     {
                         hit.GetComponent<MachineScript>().CraftOn();
+                    }
+                    else if (hit.gameObject.name == "Last_Machine")
+                    {
+                        hit.GetComponent<FinalMachineScript>().CraftOn();    
                     }
                 }
             }
