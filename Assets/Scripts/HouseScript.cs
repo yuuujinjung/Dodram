@@ -20,14 +20,14 @@ public class HouseScript : MonoBehaviour
 
         changeValue = (float)needPartsNum / buildingParts.Length;
         checkIndex = 0;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-        if (buildingParts.Length > checkIndex) 
+        
+        if (buildingParts.Length > checkIndex)
         {
             while (countNum-changeValue>=0)
             {
@@ -38,8 +38,15 @@ public class HouseScript : MonoBehaviour
                 go.transform.localPosition = new Vector3(0, 0,go.transform.position.z);
 
                 checkIndex += 1;
-            }   
+            }
         }
+        else 
+        {
+            //Time.timeScale = 0f;
+            GameObject.Find("EndCanvas").transform.Find("EndBG").gameObject.SetActive(true);
+
+        }
+
 
     }
 

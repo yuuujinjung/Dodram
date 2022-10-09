@@ -33,4 +33,16 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene(sceneNum);
         transitionAnim.SetTrigger("Start");
     }
+    //public void changeTimeScale()
+    //{
+    //    Debug.Log("Time Changed!");
+    //    if(Time.timeScale == 1f)
+    //    {
+    //        Time.timeScale = 0f;
+    //    }
+    //    else
+    //    {
+    //        Time.timeScale = 1f;
+    //    }
+    //}
 }
