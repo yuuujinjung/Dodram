@@ -40,10 +40,7 @@ public class RecipeScript : MonoBehaviour
             ingredientlist += (ingredientStringArray[randArray[i]].ToString() + "\n");
         }
 
-        recipeText.text =
-            "<레시피>\n\n" +
-            ingredientlist +
-            "\n레시피 이외의 재료는 들어가지 않습니다.";
+        recipeText.text = ingredientlist;
     }
 
     public void RecipeSetting()
