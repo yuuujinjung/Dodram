@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{0a20294a-0ed3-4540-9788-5ef665df5bff}">
+		<property name="name">
+			<value>TimeLeft</value>
+		</property>
+		<relationship name="folder">
+			<destination>{57ec199b-a520-4d77-b144-58d6a5cf3f6d}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{577bd0a3-5483-4307-af4e-b9b6ee6e540d}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{577bd0a3-5483-4307-af4e-b9b6ee6e540d}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Normal</value>
+			<value>HalfTime</value>
+			<value>QuarterTime</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

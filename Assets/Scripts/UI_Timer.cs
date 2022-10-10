@@ -5,16 +5,17 @@ using System.Collections;
 
 public class UI_Timer : MonoBehaviour
 {
-    [SerializeField] private float _MAX_TIME = 300.0f;
-    [SerializeField] private float _current_time;
-    [SerializeField] private float width = 1600;
-    [SerializeField] private float endWidth = 140;
+    public float _MAX_TIME;
+    [SerializeField] private float _currentTime;
+    public float width;
+    public Vector2 currentSize;
+    public float endWidth;
 
     RectTransform rect;
 
     void Start()
     {
-        _current_time = _MAX_TIME;
+        _currentTime = _MAX_TIME;
 
         rect = GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(width, rect.sizeDelta.y);
@@ -23,13 +24,14 @@ public class UI_Timer : MonoBehaviour
 
     void Update()
     {
-        if (_current_time <= 0)
+        if (_currentTime <= 0)
         {
             return;
         }
 
-        _current_time -= Time.deltaTime;
-        rect.sizeDelta = new Vector2((width-endWidth) * (_current_time / _MAX_TIME)+endWidth, rect.sizeDelta.y);
+        _currentTime -= Time.deltaTime;
+        currentSize = new Vector2((width-endWidth) * (_currentTime / _MAX_TIME)+endWidth, rect.sizeDelta.y);
+        rect.sizeDelta = currentSize;
 
 
     }

@@ -6068,8 +6068,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MAX_TIME: 240
-  _current_time: 0
+  _currentTime: 0
   width: 1400
+  currentSize: {x: 0, y: 0}
   endWidth: 140
 --- !u!4 &812685250 stripped
 Transform:
@@ -17159,9 +17160,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1439182234}
   - component: {fileID: 1439182233}
-  - component: {fileID: 1439182232}
   - component: {fileID: 1439182235}
   - component: {fileID: 1439182236}
+  - component: {fileID: 1439182237}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -17169,14 +17170,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1439182232
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1439182231}
-  m_Enabled: 1
 --- !u!20 &1439182233
 Camera:
   m_ObjectHideFlags: 0
@@ -17288,6 +17281,20 @@ MonoBehaviour:
   minZoom: 10
   maxZoom: 6
   zoomLimiter: 10
+  newZoom: 0
+--- !u!114 &1439182237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439182231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &1460329472
 GameObject:
   m_ObjectHideFlags: 0
@@ -18307,6 +18314,94 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723211548}
   m_CullTransparentMesh: 1
+--- !u!1 &1738859215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1738859217}
+  - component: {fileID: 1738859216}
+  - component: {fileID: 1738859218}
+  m_Layer: 0
+  m_Name: BGMAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1738859216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738859215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 108239814
+      Data2: 1176008861
+      Data3: 361357478
+      Data4: -293191273
+    Path: event:/BG_GameScene_1
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params:
+  - Name: TimeLeft
+    Value: 0
+  - Name: Zoom
+    Value: 6
+  - Name: Pause
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &1738859217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738859215}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.62741065, y: 0.27856025, z: -0.012704416}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1738859218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738859215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2499643383e68e24ba262d191569ac75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BGMAudio: {fileID: 1738859215}
+  mainCamera: {fileID: 1439182231}
+  _zoom: 0
+  timer: {fileID: 779787041}
+  _pureWidth: 0
+  _pureCurrentSizeX: 1500
+  pauseCanvas: {fileID: 214730255}
 --- !u!1001 &1764104894
 PrefabInstance:
   m_ObjectHideFlags: 0

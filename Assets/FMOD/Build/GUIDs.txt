@@ -1,0 +1,6 @@
+{da32860a-fd00-4ab3-9fd8-99dc50bc42c1} bank:/Master
+{422fa6de-8c7b-06f1-1991-1322a14f4459} bank:/Master.strings
+{1a513ffa-1c84-4aa7-9166-6bac45d966f8} bus:/
+{d9ca7aa0-2d27-4522-a778-4a90fb9e5574} bus:/Reverb
+{577bd0a3-5483-4307-af4e-b9b6ee6e540d} parameter:/TimeLeft
+{1c6e6b89-c4a9-4810-8fb8-958ba7c07c0a} parameter:/Zoom

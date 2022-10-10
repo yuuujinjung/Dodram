@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{30efb4c8-9947-40f3-a22a-755a322050b7}">
+		<property name="name">
+			<value>Zoom</value>
+		</property>
+		<relationship name="folder">
+			<destination>{57ec199b-a520-4d77-b144-58d6a5cf3f6d}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{1c6e6b89-c4a9-4810-8fb8-958ba7c07c0a}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{1c6e6b89-c4a9-4810-8fb8-958ba7c07c0a}">
+		<property name="minimum">
+			<value>6</value>
+		</property>
+		<property name="maximum">
+			<value>10</value>
+		</property>
+		<property name="initialValue">
+			<value>6</value>
+		</property>
+		<relationship name="automators">
+			<destination>{cc06c697-b66c-411f-95d3-e1400c0b2f79}</destination>
+		</relationship>
+	</object>
+	<object class="Automator" id="{cc06c697-b66c-411f-95d3-e1400c0b2f79}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>cursorPosition</value>
+		</property>
+	</object>
+</objects>
