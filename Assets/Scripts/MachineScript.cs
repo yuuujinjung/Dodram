@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class MachineScript : MonoBehaviour
 {
-    //public GameObject Hand;
-    
     public float craftTime;
     public float destroyTime;
     public float workTime;
@@ -21,6 +19,8 @@ public class MachineScript : MonoBehaviour
     }
 
     public MachineState state;
+
+    public GameObject ingredient;
 
     public GameObject[] productionArray;
     
@@ -93,10 +93,12 @@ public class MachineScript : MonoBehaviour
         {
             GameObject playerItem;
             playerItem = hand.transform.GetChild(0).gameObject;
-            playerItem.transform.SetParent(this.transform);
-            playerItem.SetActive(false);   
+            if (ingredient.name == playerItem.name)
+            {
+                playerItem.transform.SetParent(this.transform);
+                playerItem.SetActive(false);      
+            }
         }
-        
     }
 
     public void CraftOn()   //제작 시작

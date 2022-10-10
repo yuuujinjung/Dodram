@@ -137,49 +137,39 @@ public class PickUpScript : MonoBehaviour
             GaugePer = 0.0f;
         }
 
-        //---------------------------------------
-        //  기계에 재료 넣기 & 실행시키기
-        //---------------------------------------
+
         if(Input.GetKeyDown(PickupKey))
         {
             if (hit != null)
-            {   
-                if (isHold == true)
+            {
+                //---------------------------------------
+                //  기계에 재료 넣기 & 실행시키기
+                //---------------------------------------
+                
+                if (isHold == true) //물건을 들고있는 상태
                 {
-                    if (Hand.transform.GetChild(0).name == "wood")  //나무 기계에 넣기
+                    if (hit.gameObject.name == "Sawmill") // 나무 기계에 넣기
                     {
-                        if (hit.gameObject.name == "Sawmill")
-                        {
-                            hit.GetComponent<MachineScript>().SubCount(Hand);
-                        }
-
+                        hit.GetComponent<MachineScript>().SubCount(Hand);
                     }
-                    else if (Hand.transform.GetChild(0).name == "cobblestone")  //돌 기계에 넣기
+                    else if (hit.gameObject.name == "Stonecutter") // 돌 기계에 넣기
                     {
-                        if (hit.gameObject.name == "Stonecutter")
-                        {
-                            hit.GetComponent<MachineScript>().SubCount(Hand);
-                        }
+                        hit.GetComponent<MachineScript>().SubCount(Hand);
                     }
-                    else if (Hand.transform.GetChild(0).name == "chip")     //풀 기계에 넣기
+                    else if (hit.gameObject.name == "Mill") // 버섯 기계에 넣기
                     {
-                        if (hit.gameObject.name == "Mill")
-                        {
-                            hit.GetComponent<MachineScript>().SubCount(Hand);
-                        }
+                        hit.GetComponent<MachineScript>().SubCount(Hand);
                     }
-                    
-                    if (hit.gameObject.name == "Last_Machine")  //2차가공 기계에 넣기
+                    else if (hit.gameObject.name == "Last_Machine")  //2차가공 기계에 넣기
                     {
                         hit.GetComponent<FinalMachineScript>().SubCount(Hand);
                     }
-
-                    if (hit.gameObject.name == "House") //집에 2차가공 물건 넣기
+                    else if (hit.gameObject.name == "House") //집에 2차가공 물건 넣기
                     {
                         hit.GetComponent<HouseScript>().Building(Hand);
                     }
                 }
-                else
+                else //물건을 들고있지 않은 상태
                 {
                     //기계가 아이템을 다 만들었다면 꺼냄
                     if(hit.gameObject.name == "Sawmill")

@@ -7,8 +7,9 @@ public class HouseScript : MonoBehaviour
 {
     public int needPartsNum;
     
-    public SpriteRenderer spriteRenderer;
     public GameObject[] buildingParts;
+
+    public GameObject endCanvas;
     
     private float countNum;
     private float changeValue;
@@ -43,7 +44,7 @@ public class HouseScript : MonoBehaviour
         else 
         {
             //Time.timeScale = 0f;
-            GameObject.Find("EndCanvas").transform.Find("EndBG").gameObject.SetActive(true);
+            endCanvas.SetActive(true);
 
         }
 

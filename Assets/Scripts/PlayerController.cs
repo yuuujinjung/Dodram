@@ -53,13 +53,13 @@ public class PlayerController : MonoBehaviour
 
         if (MainPlayer)
         {
-            _movement.x = Input.GetAxisRaw("Horizontal2");
-            _movement.y = Input.GetAxisRaw("Vertical2");   
+            _movement.x = Input.GetAxisRaw("Horizontal");
+            _movement.y = Input.GetAxisRaw("Vertical");   
         }
         else
         {
-            _movement.x = Input.GetAxisRaw("Horizontal");
-            _movement.y = Input.GetAxisRaw("Vertical");   
+            _movement.x = Input.GetAxisRaw("Horizontal2");
+            _movement.y = Input.GetAxisRaw("Vertical2");   
         }
 
         _movement.Normalize();
