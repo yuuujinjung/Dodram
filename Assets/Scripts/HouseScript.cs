@@ -27,7 +27,7 @@ public class HouseScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (buildingParts.Length > checkIndex)
         {
             while (countNum-changeValue>=0)
@@ -41,9 +41,9 @@ public class HouseScript : MonoBehaviour
                 checkIndex += 1;
             }
         }
-        else 
+        if(checkIndex==7)
         {
-            //Time.timeScale = 0f;
+            Time.timeScale = 0f;
             endCanvas.SetActive(true);
 
         }

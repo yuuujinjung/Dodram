@@ -18,7 +18,6 @@ public class SceneManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void SceneChanger()
@@ -29,20 +28,11 @@ public class SceneManagement : MonoBehaviour
     IEnumerator LoadScene()
     {
         transitionAnim.SetTrigger("End");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSecondsRealtime(1.5f);
         SceneManager.LoadScene(sceneNum);
         transitionAnim.SetTrigger("Start");
     }
-    //public void changeTimeScale()
-    //{
-    //    Debug.Log("Time Changed!");
-    //    if(Time.timeScale == 1f)
-    //    {
-    //        Time.timeScale = 0f;
-    //    }
-    //    else
-    //    {
-    //        Time.timeScale = 1f;
-    //    }
-    //}
+
+
+
 }
