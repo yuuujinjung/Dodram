@@ -22,6 +22,16 @@ public class PlayerController : MonoBehaviour
         Idle = 5
     }
 
+    public enum Dir
+    {
+        Right = 1,
+        Left = 2,
+        Up = 3,
+        Down = 4
+    }
+    
+    public Dir direction;
+
     void Start()
     {
         // // 구독 신청! KeyAction이 Invoke 되면 호출할 함수! (중복을 막기위해 빼준 후 추가)
@@ -30,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
         _animator = GetComponent<Animator>();
         _characterRigidbody = GetComponent<Rigidbody2D>();
+        direction = Dir.Down;
     }
 
     // Update is called once per frame
@@ -72,18 +83,22 @@ public class PlayerController : MonoBehaviour
         if (_movement.x > 0)
         {
             _animator.SetInteger(_animationState, (int)States.Right);
+            direction = Dir.Right;
         }
         else if (_movement.x < 0)
         {
             _animator.SetInteger(_animationState, (int)States.Left);
+            direction = Dir.Left;
         }
         else if (_movement.y > 0)
         {
             _animator.SetInteger(_animationState, (int)States.Up);
+            direction = Dir.Up;
         }
         else if (_movement.y < 0)
         {
             _animator.SetInteger(_animationState, (int)States.Down);
+            direction = Dir.Down;
         }
         else
         {

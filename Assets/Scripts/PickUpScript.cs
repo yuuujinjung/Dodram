@@ -74,6 +74,27 @@ public class PickUpScript : MonoBehaviour
         {
             isHold = false;
         }
+
+        var dir = this.gameObject.GetComponent<PlayerController>().direction;
+        if (dir == PlayerController.Dir.Down)
+        {
+            boxTransform = new Vector3(0, -0.12f, 0);
+        }
+        else if(dir == PlayerController.Dir.Up)
+        {
+            boxTransform = new Vector3(0, 0.7f, 0); 
+        }
+        else if(dir == PlayerController.Dir.Left)
+        {
+            boxTransform = new Vector3(-0.56f, 0.4f, 0);
+        }
+        else if(dir == PlayerController.Dir.Right)
+        {
+            boxTransform = new Vector3(0.61f, 0.4f, 0);
+        }
+
+
+
     }
 
     void GaugeBar()
