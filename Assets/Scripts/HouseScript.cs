@@ -41,11 +41,10 @@ public class HouseScript : MonoBehaviour
                 checkIndex += 1;
             }
         }
-        if(checkIndex==7)
+        if(checkIndex==31)
         {
             Time.timeScale = 0f;
             endCanvas.SetActive(true);
-
         }
 
 

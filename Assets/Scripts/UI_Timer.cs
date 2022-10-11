@@ -12,6 +12,8 @@ public class UI_Timer : MonoBehaviour
     public float endWidth;
 
     RectTransform rect;
+    
+    public GameObject endCanvas;
 
     void Start()
     {
@@ -24,15 +26,16 @@ public class UI_Timer : MonoBehaviour
 
     void Update()
     {
-        if (_currentTime <= 0)
+        if (_currentTime <= 0 && Time.timeScale != 0f)
         {
-            return;
+            Time.timeScale = 0f;
+            endCanvas.SetActive(true);
         }
-
-        _currentTime -= Time.deltaTime;
-        currentSize = new Vector2((width-endWidth) * (_currentTime / _MAX_TIME)+endWidth, rect.sizeDelta.y);
-        rect.sizeDelta = currentSize;
-
-
+        else
+        {
+            _currentTime -= Time.deltaTime;
+            currentSize = new Vector2((width-endWidth) * (_currentTime / _MAX_TIME)+endWidth, rect.sizeDelta.y);
+            rect.sizeDelta = currentSize;    
+        }
     }
 }

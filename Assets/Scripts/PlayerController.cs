@@ -56,11 +56,11 @@ public class PlayerController : MonoBehaviour
 
     private void Movement()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            _characterRigidbody.AddForce(_characterRigidbody.velocity * dashPower, ForceMode2D.Impulse);
-            return;
-        }
+        // if (Input.GetKeyDown(KeyCode.LeftAlt))
+        // {
+        //     _characterRigidbody.AddForce(_characterRigidbody.velocity * dashPower, ForceMode2D.Impulse);
+        //     return;
+        // }
 
         if (MainPlayer)
         {

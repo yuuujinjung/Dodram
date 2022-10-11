@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,14 +43,17 @@ public class GameManager : MonoBehaviour
     public void changeTimeScale()
     {
         Debug.Log("Time Changed!");
-        if (Time.timeScale == 1f)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+        // if (Time.timeScale == 1f)
+        // {
+        //     Time.timeScale = 0f;
+        // }
+        // else
+        // {
+        //     Time.timeScale = 1f;
+        // }
+        
+        Time.timeScale = MathF.Abs(1-Time.timeScale);
+        
         Debug.Log(Time.timeScale);
     }
 }

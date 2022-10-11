@@ -12,7 +12,8 @@ public class SceneManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this);
+        Time.timeScale = 1f;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
@@ -31,6 +32,8 @@ public class SceneManagement : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.5f);
         SceneManager.LoadScene(sceneNum);
         transitionAnim.SetTrigger("Start");
+        yield return new WaitForSecondsRealtime(1.5f);
+        Destroy(gameObject);
     }
 
 
