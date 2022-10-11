@@ -6063,7 +6063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de6842cb333fc94cb431a629fb8f78d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MAX_TIME: 20
+  _MAX_TIME: 240
   _currentTime: 0
   width: 1400
   currentSize: {x: 0, y: 0}

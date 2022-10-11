@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using UnityEditor.PackageManager;
 using UnityEngine.Serialization;
 
 public class PickUpScript : MonoBehaviour
