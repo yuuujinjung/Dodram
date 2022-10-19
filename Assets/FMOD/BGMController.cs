@@ -4,8 +4,6 @@ using UnityEngine;
 public class BGMController : MonoBehaviour
 {
     StudioEventEmitter emitter;
-    FMOD.Studio.Bus MasterBus;
-    public GameObject BGMAudio;
 
     //파라미터이름:Zoom
     public GameObject mainCamera;
@@ -24,7 +22,6 @@ public class BGMController : MonoBehaviour
     void Start()
     {
         emitter = GetComponent<FMODUnity.StudioEventEmitter>();
-        MasterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
 
         _pureWidth = timer.GetComponent<UI_Timer>().width - timer.GetComponent<UI_Timer>().endWidth;
 
@@ -32,14 +29,6 @@ public class BGMController : MonoBehaviour
 
     void Update()
     {
-        if (_pureCurrentSizeX <= 0)
-        {
-            Time.timeScale = 0;
-            //MasterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); //...
-            //BGMAudio.SetActive(false); //...
-            return;
-        }
-
         //Zoom
         _zoom = mainCamera.GetComponent<MultipleTargetCamera>().newZoom;
         emitter.SetParameter("Zoom", _zoom);
@@ -48,6 +37,11 @@ public class BGMController : MonoBehaviour
         _pureCurrentSizeX = timer.GetComponent<UI_Timer>().currentSize.x
             - timer.GetComponent<UI_Timer>().endWidth;
         //emitter.SetParameter("TimeLeft", 0);
+
+        if (_pureCurrentSizeX == 0)
+        {
+            Time.timeScale = 0;
+        }
 
         if (_pureCurrentSizeX <= (_pureWidth / 2)&& _pureCurrentSizeX > (_pureWidth / 4))
         {
