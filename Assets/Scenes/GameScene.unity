@@ -17820,7 +17820,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000f9696196dd8b6ca7c37691cc45f0e01d
+  m_ApplyToSortingLayers: 00000000f9696196dd8b6ca7f122422b45f0e01d
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -18280,10 +18280,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1738859215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2499643383e68e24ba262d191569ac75, type: 3}
+  m_Script: {fileID: 11500000, guid: c941146378623cd41a78ff1de89c90a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BGMAudio: {fileID: 1738859215}
   mainCamera: {fileID: 1439182231}
   _zoom: 0
   timer: {fileID: 779787041}
