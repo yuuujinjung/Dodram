@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using MonsterLove.StateMachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,36 +10,69 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _characterRigidbody;
     private Vector2 _movement;
 
-    public bool MainPlayer;
+    public bool isMainPlayer;
 
-    Animator _animator;
-    string _animationState = "AnimationState";
+    private Animator _animator;
+    public string currentState;
 
-    enum States
+    private enum States
     {
-        Right = 1,
-        Left = 2,
-        Up = 3,
-        Down = 4,
-        Idle = 5
+        Idle,
+        Walk,
+        Work
     }
+
+    StateMachine<States,StateDriverUnity> FSM;
 
     public enum Dir
     {
-        Right = 1,
-        Left = 2,
-        Up = 3,
-        Down = 4
+        Up = 1,
+        Down = 2,
+        Left = 3,
+        Right = 4
     }
     
     public Dir direction;
 
+    void ChangeAnimation(string newState)
+    {
+        if (currentState == newState)
+        {
+            return;
+        }
+        
+        _animator.Play(newState);
+
+        currentState = newState;
+    }
+    
+    bool IsInputMoveKey()
+    {
+        if (isMainPlayer)
+        {
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if (Input.GetAxisRaw("Horizontal2") != 0 || Input.GetAxisRaw("Vertical2") != 0)
+            {
+                return true;
+            } 
+        }
+        return false;
+    }
+
+    private void Awake()
+    {
+        FSM = new StateMachine<States,StateDriverUnity>(this);
+        FSM.ChangeState(States.Idle);
+    }
+    
     void Start()
     {
-        // // 구독 신청! KeyAction이 Invoke 되면 호출할 함수! (중복을 막기위해 빼준 후 추가)
-        // Managers.Input.KeyAction -= OnKeyboard;
-        // Managers.Input.KeyAction += OnKeyboard;
-
         _animator = GetComponent<Animator>();
         _characterRigidbody = GetComponent<Rigidbody2D>();
         direction = Dir.Down;
@@ -46,23 +81,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateState();
-    }
-
-    private void FixedUpdate()
-    {
-        Movement();
+        UpdateDir();
+        FSM.Driver.Update.Invoke();
     }
 
     private void Movement()
     {
-        // if (Input.GetKeyDown(KeyCode.LeftAlt))
-        // {
-        //     _characterRigidbody.AddForce(_characterRigidbody.velocity * dashPower, ForceMode2D.Impulse);
-        //     return;
-        // }
-
-        if (MainPlayer)
+        if (isMainPlayer)
         {
             _movement.x = Input.GetAxisRaw("Horizontal");
             _movement.y = Input.GetAxisRaw("Vertical");   
@@ -78,32 +103,91 @@ public class PlayerController : MonoBehaviour
         _characterRigidbody.velocity = _movement * speed;
     }
 
-    private void UpdateState()
+    private void UpdateDir()
     {
         if (_movement.x > 0)
         {
-            _animator.SetInteger(_animationState, (int)States.Right);
             direction = Dir.Right;
         }
         else if (_movement.x < 0)
         {
-            _animator.SetInteger(_animationState, (int)States.Left);
             direction = Dir.Left;
         }
         else if (_movement.y > 0)
         {
-            _animator.SetInteger(_animationState, (int)States.Up);
             direction = Dir.Up;
         }
         else if (_movement.y < 0)
         {
-            _animator.SetInteger(_animationState, (int)States.Down);
             direction = Dir.Down;
         }
-        else
-        {
-            _animator.SetInteger(_animationState, (int)States.Idle);
-        }
     }
+
+    /**************************************** Idle ************************************/
+    void Idle_Enter()
+    {
+        
+    }
+    
+    void Idle_Update()
+    {
+        switch (direction)
+        {
+            case Dir.Up:
+                ChangeAnimation("Player_Idle_Up");
+                break;
+            case Dir.Down:
+                ChangeAnimation("Player_Idle_Down");
+                break;
+            case Dir.Left:
+                ChangeAnimation("Player_Idle_Left");;
+                break;
+            case Dir.Right:
+                ChangeAnimation("Player_Idle_Right");
+                break;
+        }
+
+        if (IsInputMoveKey())
+        {
+            FSM.ChangeState(States.Walk);
+        }
+
+    }
+
+
+    
+    /**************************************** Walk ************************************/
+    protected virtual void Walk_Enter()
+    {
+
+    }
+
+    protected virtual void Walk_Update()
+    {
+        Movement();
+        
+        switch (direction)
+        {
+            case Dir.Up:
+                ChangeAnimation("Player_Walk_Up");
+                break;
+            case Dir.Down:
+                ChangeAnimation("Player_Walk_Down");
+                break;
+            case Dir.Left:
+                ChangeAnimation("Player_Walk_Left");;
+                break;
+            case Dir.Right:
+                ChangeAnimation("Player_Walk_Right");
+                break;
+        }
+
+        if (!IsInputMoveKey())
+        {
+            FSM.ChangeState(States.Idle);
+        }
+
+    }
+    
 
 }

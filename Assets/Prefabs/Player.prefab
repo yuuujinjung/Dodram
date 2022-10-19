@@ -131,7 +131,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -108072237, guid: f96851df0dcea644d90515a988371431, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b4385154c7d88e438c965273621c902, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -141,7 +141,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &6713485274810973588
 Animator:
   serializedVersion: 4
@@ -179,7 +179,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.96099997, y: 1.04}
+    oldSize: {x: 0.89, y: 0.87}
     newSize: {x: 0.96099997, y: 1.04}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -202,7 +202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   dashPower: 10
-  MainPlayer: 1
+  isMainPlayer: 1
+  direction: 0
 --- !u!114 &457332827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +227,7 @@ MonoBehaviour:
   prfGaugeBar: {fileID: 6077395782407935344, guid: 21b0a8999c7a9034d9217db9436dea06, type: 3}
   canvas: {fileID: 0}
   height: 1.2
-  diggingSpd: 30
+  diggingSpd: 50
   targetObject: {fileID: 0}
   targetEndObject: {fileID: 0}
   whiteMaterial: {fileID: 2100000, guid: 93c7ef568ea5f314585363389ad1baaf, type: 2}

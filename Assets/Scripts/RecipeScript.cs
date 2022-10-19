@@ -45,9 +45,8 @@ public class RecipeScript : MonoBehaviour
 
     public void RecipeSetting()
     {
-        // randArray = GetRandomInt(needNum, 0, ingredientArray.Length);
-        randArray = new[] { 1, 4, 7 }; //시연용 코드
-        
+        randArray = GetRandomInt(needNum, 0, ingredientArray.Length);
+
         nowRecipe.Clear();
         
         for (int i = 0; i < randArray.Length; i++)

@@ -48,7 +48,7 @@ public class PickUpScript : MonoBehaviour
         gaugeBar = Instantiate(prfGaugeBar, canvas.transform).GetComponent<RectTransform>();
         nowGaugebar = gaugeBar.transform.GetChild(0).GetComponent<Image>();
 
-        if (this.GetComponent<PlayerController>().MainPlayer)
+        if (this.GetComponent<PlayerController>().isMainPlayer)
         {
             InteractiveKey = ArrayInteractiveKey[0];
             PickupKey = ArrayPickupKey[0];
