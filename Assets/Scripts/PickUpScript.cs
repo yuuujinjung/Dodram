@@ -306,11 +306,16 @@ public class PickUpScript : MonoBehaviour
                         //바꾸기
                     {
                         changeHold = hit.gameObject;
+                        if (Hand.transform.GetChild(0).gameObject.CompareTag("tool"))
+                        {
+                            Hand.transform.GetChild(0).gameObject.SetActive(true);
+                        }
                         Hand.transform.GetChild(0).gameObject.layer = 6;
                         Hand.transform.DetachChildren();
                         changeHold.transform.SetParent(Hand.transform);
                         changeHold.transform.localPosition = Vector2.zero;
                         changeHold.layer = 0;
+                        changeHold.SetActive(false);
                     }
                 }
                 else
@@ -321,6 +326,10 @@ public class PickUpScript : MonoBehaviour
                         hit.gameObject.transform.SetParent(Hand.transform);
                         hit.transform.localPosition = Vector2.zero;
                         hit.gameObject.layer = 0; //Default
+                        if (hit.CompareTag("tool"))
+                        {
+                            hit.gameObject.SetActive(false);
+                        }
                     }
                 }
             }
@@ -329,6 +338,10 @@ public class PickUpScript : MonoBehaviour
                 if (isHold == true)
                 {
                     //놓기
+                    if (Hand.transform.GetChild(0).gameObject.CompareTag("tool"))
+                    {
+                        Hand.transform.GetChild(0).gameObject.SetActive(true);
+                    }
                     Hand.transform.GetChild(0).gameObject.layer = 6;
                     Hand.transform.DetachChildren();
                     return;

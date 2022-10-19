@@ -85,21 +85,9 @@ public class PlayerController : MonoBehaviour
         FSM.Driver.Update.Invoke();
     }
 
-    private void Movement()
+    private void FixedUpdate()
     {
-        if (isMainPlayer)
-        {
-            _movement.x = Input.GetAxisRaw("Horizontal");
-            _movement.y = Input.GetAxisRaw("Vertical");   
-        }
-        else
-        {
-            _movement.x = Input.GetAxisRaw("Horizontal2");
-            _movement.y = Input.GetAxisRaw("Vertical2");   
-        }
-
         _movement.Normalize();
-
         _characterRigidbody.velocity = _movement * speed;
     }
 
@@ -152,6 +140,11 @@ public class PlayerController : MonoBehaviour
             FSM.ChangeState(States.Walk);
         }
 
+        if (this.GetComponent<PickUpScript>().GaugePer != 0.0f)
+        {
+            FSM.ChangeState(States.Work);
+        }
+
     }
 
 
@@ -164,8 +157,6 @@ public class PlayerController : MonoBehaviour
 
     protected virtual void Walk_Update()
     {
-        Movement();
-        
         switch (direction)
         {
             case Dir.Up:
@@ -181,13 +172,78 @@ public class PlayerController : MonoBehaviour
                 ChangeAnimation("Player_Walk_Right");
                 break;
         }
+        
+        if (isMainPlayer)
+        {
+            _movement.x = Input.GetAxisRaw("Horizontal");
+            _movement.y = Input.GetAxisRaw("Vertical");   
+        }
+        else
+        {
+            _movement.x = Input.GetAxisRaw("Horizontal2");
+            _movement.y = Input.GetAxisRaw("Vertical2");   
+        }
 
         if (!IsInputMoveKey())
         {
             FSM.ChangeState(States.Idle);
         }
-
+        
+        if (this.GetComponent<PickUpScript>().GaugePer != 0.0f)
+        {
+            FSM.ChangeState(States.Work);
+        }
     }
+
     
+    /**************************************** Work ************************************/
+
+
+    protected virtual void Work_Update()
+    {
+        if (this.GetComponent<PickUpScript>().GaugePer == 0.0f)
+        {
+            FSM.ChangeState(States.Idle);
+        }
+        
+        switch (direction)
+        {
+            case Dir.Up:
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "PickAxe")
+                    ChangeAnimation("Player_Use_Pickaxe_Up");
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "Axe")
+                    ChangeAnimation("Player_Use_Axe_Up");
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "Scythe")
+                    ChangeAnimation("Player_Use_Shovel_Up");
+                break;
+            case Dir.Down:
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "PickAxe")
+                    ChangeAnimation("Player_Use_Pickaxe_Down");
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "Axe")
+                    ChangeAnimation("Player_Use_Axe_Down");
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "Scythe")
+                    ChangeAnimation("Player_Use_Shovel_Down");
+                break;
+            case Dir.Left:
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "PickAxe")
+                    ChangeAnimation("Player_Use_Pickaxe_Left");
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "Axe")
+                    ChangeAnimation("Player_Use_Axe_Left");
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "Scythe")
+                    ChangeAnimation("Player_Use_Shovel_Left");
+                break;
+            case Dir.Right:
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "PickAxe")
+                    ChangeAnimation("Player_Use_Pickaxe_Right");
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "Axe")
+                    ChangeAnimation("Player_Use_Axe_Right");
+                if (this.GetComponent<PickUpScript>().Hand.transform.GetChild(0).name == "Scythe")
+                    ChangeAnimation("Player_Use_Shovel_Right");
+                break;
+        }
+        
+        
+    }
+
 
 }

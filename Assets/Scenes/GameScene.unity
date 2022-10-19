@@ -1210,6 +1210,10 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.87
       objectReference: {fileID: 0}
+    - target: {fileID: 1440896990685914953, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7711777664587217802, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2530,6 +2534,26 @@ PrefabInstance:
     - target: {fileID: 457332827, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
       propertyPath: size.y
       value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440896990685914953, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440896990685914953, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440896990685914953, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440896990685914953, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440896990685914953, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7717794331357661637, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
       propertyPath: m_RootOrder
