@@ -1203,6 +1203,10 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7711777664587217802, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4b4385154c7d88e438c965273621c902, type: 3}
+    - target: {fileID: 7711777664587217802, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
       propertyPath: m_Color.b
       value: 0.7264151
       objectReference: {fileID: 0}
@@ -6340,6 +6344,10 @@ PrefabInstance:
       propertyPath: boxTransform.y
       value: -0.12
       objectReference: {fileID: 0}
+    - target: {fileID: 7711777664587217802, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4b4385154c7d88e438c965273621c902, type: 3}
     - target: {fileID: 7711777664587217802, guid: 88b2c01766796d84d8bf834ee0105495, type: 3}
       propertyPath: m_SpriteSortPoint
       value: 1
