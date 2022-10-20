@@ -315,7 +315,10 @@ public class PickUpScript : MonoBehaviour
                         changeHold.transform.SetParent(Hand.transform);
                         changeHold.transform.localPosition = Vector2.zero;
                         changeHold.layer = 0;
-                        changeHold.SetActive(false);
+                        if (changeHold.CompareTag("tool"))
+                        {
+                            changeHold.SetActive(false);   
+                        }
                     }
                 }
                 else

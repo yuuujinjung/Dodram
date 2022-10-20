@@ -198,6 +198,11 @@ public class PlayerController : MonoBehaviour
     
     /**************************************** Work ************************************/
 
+    protected virtual void Work_Enter()
+    {
+        _movement.x = 0.0f;
+        _movement.y = 0.0f;
+    }
 
     protected virtual void Work_Update()
     {
