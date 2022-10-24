@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class FinalMachineScript : MonoBehaviour
 {
+    public GameObject recipcheck;
+    public GameObject mushcheck;
+    public GameObject rockcheck;
+    public GameObject treecheck;
+
     public float craftTime;
     public float destroyTime;
     public float workTime;
@@ -125,6 +130,10 @@ public class FinalMachineScript : MonoBehaviour
         if (state == MachineState.Destroying)
         {
             CreateDone(hand);
+            recipcheck.GetComponent<RecipeScript>().recipeOrder++;
+            mushcheck.GetComponent<RecipeDawnCheck>().checkInit();
+            rockcheck.GetComponent<RecipeDawnCheck>().checkInit();
+            treecheck.GetComponent<RecipeDawnCheck>().checkInit();
         }
     }
 
